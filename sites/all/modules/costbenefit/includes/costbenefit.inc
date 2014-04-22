@@ -72,6 +72,22 @@ class CostbenefitEntityController extends EntityAPIController {
     }
     return $build;
   }
+
+  /**
+   * Overrides save() method.
+   *
+   * Populates created and uid automatically.
+   */
+  public function save($entity, DatabaseTransaction $transaction = NULL) {
+    global $user;
+    $now = REQUEST_TIME;
+    if (isset($entity->is_new)) {
+      $entity->created = $now;
+      $entity->uid = $user->uid;
+    }
+    $entity->updated = $now;
+    parent::save($entity, $transaction);
+  }
 }
 
 
@@ -93,5 +109,17 @@ class CostbenefitItemEntity extends Entity {
  */
 class CostbenefitItemEntityController extends EntityAPIController {
 
+  /**
+   * Overrides save() method.
+   *
+   * Sets parent costbenefit updated property.
+   */
+  public function save($entity, DatabaseTransaction $transaction = NULL) {
+    parent::save($entity, $transaction);
+    // Load the parent costbenefit.
+    $costbenefit = costbenefit_load($entity->cb_id);
+    // Save to update the timestamp.
+    $costbenefit->save();
+  }
 }
 

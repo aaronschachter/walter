@@ -18,16 +18,19 @@ class CostbenefitEntity extends Entity {
     return array('path' => 'cb/' . $this->identifier());
   }
 
+  /**
+   * Returns array of costbenefit_item objects for entity's given $box.
+   */
   public function getBoxItems($box) {
     $items = array();
     $query = db_select($this->item_table, 'cbi')
-      ->fields('cbi', array('cb_item_id', 'title'))
+      ->fields('cbi')
       ->condition('cb_id', $this->cb_id)
       ->condition('box', $box);
-    $results = $query->execute();
-    foreach($results as $seq => $result) {
-      $items[$seq]['cb_item_id'] = $result->cb_item_id;
-      $items[$seq]['title'] = $result->title;
+    $result = $query->execute()->fetchAll();
+    foreach ($result as $delta => $record) {
+      $items[$delta] = $record;
+      $items[$delta]->type_desc = $record->type ? 'Long term' : 'Short term';
     }
     return $items;
   }

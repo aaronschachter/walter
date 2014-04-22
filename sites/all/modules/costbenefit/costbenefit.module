@@ -170,16 +170,24 @@ function costbenefit_access($entity) {
  * Returns the costbenefit box label based on given number $box.
  */
 function _costbenefit_get_box_label($box) {
-  $type = 'Advantage';
-  // If box number is even:
-  if ($box % 2 == 0) {
-    $type = 'Disadvantage';
-  }
+  $type = _costbenefit_get_box_type($box, FALSE);
   $action = 'using';
   if ($box > 2) {
     $action = 'not using';
   }
   return $type . ' of ' . $action;
+}
+
+function _costbenefit_get_box_type($box, $plural = TRUE) {
+  $type = 'Advantage';
+  // If box number is even:
+  if ($box % 2 == 0) {
+    $type = 'Disadvantage';
+  }
+  if ($plural) {
+    $type .= 's';
+  }
+  return $type;
 }
 
 /**

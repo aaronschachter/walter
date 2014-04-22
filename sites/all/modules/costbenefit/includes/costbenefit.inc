@@ -45,6 +45,11 @@ class CostbenefitEntityController extends EntityAPIController {
    */
   public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {
     $build = parent::buildContent($entity, $view_mode, $langcode, $content);
+    $build['doing_header'] = array(
+      '#prefix' => '<h2 class="text-center">',
+      '#markup' => t('Doing or using'),
+      '#suffix' => '</h2>',
+    );
     $box_items = array();
     // Loop through the boxes.
     for ($i = 1; $i <= 4; $i++) {
@@ -56,19 +61,14 @@ class CostbenefitEntityController extends EntityAPIController {
       $build['box_' . $i] = array(
         '#markup' => theme('costbenefit_box', array('vars' => $vars))
       );
+      if ($i == 2) {
+        $build['not_doing_header'] = array(
+          '#prefix' => '<h2 class="text-center">',
+          '#markup' => t('NOT doing or NOT using'),
+          '#suffix' => '</h2>',
+        );
+      }
     }
-    /*
-    $build['doing_header'] = array(
-      '#prefix' => '<h2 class="text-center">',
-      '#markup' => t('Doing or using'),
-      '#suffix' => '</h2>',
-    );
-    $build['not_doing_header'] = array(
-      '#prefix' => '<h2 class="text-center">',
-      '#markup' => t('NOT doing or NOT using'),
-      '#suffix' => '</h2>',
-    );
-    */
     return $build;
   }
 }

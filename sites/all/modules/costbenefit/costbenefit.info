@@ -1,0 +1,4 @@
+name = Cost Benefit
+description = Provides Cost-Benefit entity functionality.
+core = 7.x
+files[] = includes/costbenefit.inc

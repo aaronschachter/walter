@@ -1,0 +1,99 @@
+<?php
+/**
+ * @file
+ * Installation and schema hooks for costbenefit.module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function costbenefit_schema() {
+  $schema = array();
+  $schema['costbenefit'] = array(
+    'description' => 'Table of costbenefit entities.',
+    'fields' => array(
+      'cb_id' => array(
+        'description' => 'Primary key.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'The costbenefit author.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+     'title' => array(
+        'description' => 'The costbenefit title.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'created' => array(
+        'description' => 'Timestamp created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'updated' => array(
+        'description' => 'Timestamp updated.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('cb_id'),
+    'indexes' => array(
+      'uid' => array('uid'),
+    ),
+  );
+  $schema['costbenefit_item'] = array(
+    'description' => 'Table of cost-benefit items.',
+    'fields' => array(
+      'cb_item_id' => array(
+        'description' => 'Primary key.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'cb_id' => array(
+        'description' => 'The cost-benefit id.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+     'title' => array(
+        'description' => 'The cost-benefit item title.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'box' => array(
+        'description' => 'The cost-benefit item box number.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'type' => array(
+        'description' => 'A binary value: 1 for long-term, 0 for short-term.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'seq' => array(
+        'description' => 'The cost-benefit item sequence.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+    ),
+    'primary key' => array('cb_item_id'),
+    'indexes' => array(
+      'cb_id' => array('cb_id'),
+    ),
+  );
+  return $schema;
+}

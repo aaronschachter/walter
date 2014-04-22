@@ -159,3 +159,35 @@ function costbenefit_access($entity) {
   //@todo: Fix bug: Notice: Trying to get property of non-object.
   return $user->uid == $entity->uid;
 }
+
+/**
+ * ------------------------------------------------------------
+ * HELPERS
+ * ------------------------------------------------------------
+ */
+
+/**
+ * Returns the costbenefit box label based on given number $box.
+ */
+function _costbenefit_get_box_label($box) {
+  $type = 'Advantage';
+  // If box number is even:
+  if ($box % 2 == 0) {
+    $type = 'Disadvantage';
+  }
+  $action = 'using';
+  if ($box > 2) {
+    $action = 'not using';
+  }
+  return $type . ' of ' . $action;
+}
+
+/**
+ * Returns array of values to set the costbenefit_item type.
+ */
+function _costbenefit_get_type_options() {
+  return array(
+    0 => 'Short term',
+    1 => 'Long term',
+  );
+}

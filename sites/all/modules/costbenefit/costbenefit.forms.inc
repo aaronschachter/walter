@@ -36,18 +36,15 @@ function costbenefit_form($form, &$form_state, $entity = NULL) {
  * Submit callback for costbenefit_form().
  */
 function costbenefit_form_submit($form, &$form_state) {
-  global $user;
-  $values = array(
-    'title' => $form_state['values']['title'],
-    'uid' => $user->uid,
-  );
+  // If a cb_id exists, load existing entity.
   if (isset($form_state['values']['cb_id'])) {
     $entity = costbenefit_load($form_state['values']['cb_id']);
-    $entity->title = $form_state['values']['title'];
   }
+  // Else create a new entity to save.
   else {
-    $entity = entity_create('costbenefit', $values);    
+    $entity = entity_create('costbenefit', array());    
   }
+  $entity->title = $form_state['values']['title'];
   $entity->save();
   $form_state['redirect'] = 'cb/' . $entity->cb_id;
 }
@@ -66,17 +63,18 @@ function costbenefit_item_add_form($form, &$form_state, $cb, $box) {
     '#value' => $cb->cb_id,
     '#access' => FALSE,
   );
-  $form['box'] = array(
-    '#type' => 'hidden',
-    '#value' => $box,
-  );
   $form['header'] = array(
     '#markup' => 'Box ' . $box,
   );
   $form['title'] = array(
-    '#title' => t('Title:'),
+    '#title' => _costbenefit_get_box_label($box),
     '#type' => 'textfield',
     '#required' => TRUE,
+  );
+  $form['type'] = array(
+    '#type' => 'radios',
+    '#required' => TRUE,
+    '#options' => _costbenefit_get_type_options(),
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -94,6 +92,7 @@ function costbenefit_item_add_form_submit($form, &$form_state) {
   $entity->cb_id = $form_state['values']['cb_id'];  
   $entity->box = $form_state['values']['box'];
   $entity->title = $form_state['values']['title'];
+  $entity->type = $form_state['values']['type'];
   $entity->save();
   $form_state['redirect'] = 'cb/' . $entity->cb_id;
 }
@@ -115,10 +114,16 @@ function costbenefit_item_edit_form($form, &$form_state, $item) {
     '#markup' => 'Box ' . $item->box,
   );
   $form['title'] = array(
-    '#title' => t('Title:'),
+    '#title' => _costbenefit_get_box_label($item->box),
     '#type' => 'textfield',
     '#required' => TRUE,
     '#default_value' => $item->title,
+  );
+  $form['type'] = array(
+    '#type' => 'radios',
+    '#required' => TRUE,
+    '#options' => _costbenefit_get_type_options(),
+    '#default_value' => $item->type,
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -136,10 +141,11 @@ function costbenefit_item_edit_form($form, &$form_state, $item) {
 function costbenefit_item_edit_form_submit($form, &$form_state) {
   global $user;
   $entity = costbenefit_item_load($form_state['values']['cb_item_id']); 
-  //$entity->box = $form_state['values']['box'];
   $entity->title = $form_state['values']['title'];
+  $entity->type = $form_state['values']['type'];
   $entity->save();
   $form_state['redirect'] = 'cb/' . $entity->cb_id;
+  drupal_set_message("Item " . $entity->title . " has been updated.");
 }
 
 /**

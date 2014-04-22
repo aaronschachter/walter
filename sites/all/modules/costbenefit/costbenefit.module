@@ -39,9 +39,16 @@ function costbenefit_menu() {
     'file' => 'costbenefit.forms.inc',
   );
   $items['cb/%costbenefit/%/add'] = array(
-    'title' => 'New Cost-Benefit Item',
+    'title' => 'Add Item',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('costbenefit_item_form', 1, 2),
+    'page arguments' => array('costbenefit_item_add_form', 1, 2),
+    'access callback' => 'user_is_logged_in',
+    'file' => 'costbenefit.forms.inc',
+  );
+  $items['cb-item/%costbenefit_item'] = array(
+    'title' => 'Edit Item',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('costbenefit_item_edit_form', 1),
     'access callback' => 'user_is_logged_in',
     'file' => 'costbenefit.forms.inc',
   );
@@ -85,6 +92,14 @@ function costbenefit_entity_info() {
  */
 function costbenefit_load($cb_id) {
   $entity = entity_load('costbenefit', array($cb_id));
+  return array_pop($entity);
+}
+
+/**
+ * Menu autoloader for /costbenefit_item.
+ */
+function costbenefit_item_load($cb_item_id) {
+  $entity = entity_load('costbenefit_item', array($cb_item_id));
   return array_pop($entity);
 }
 

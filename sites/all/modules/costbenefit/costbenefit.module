@@ -89,6 +89,21 @@ function costbenefit_load($cb_id) {
 }
 
 /**
+ * Implements hook_theme().
+ */
+function costbenefit_theme($existing, $type, $theme, $path) {
+  return array(
+    'costbenefit_box' => array(
+      'template' => 'costbenefit-box',
+      'path' => drupal_get_path('module', 'costbenefit') . '/theme',
+      'variables' => array(
+        'vars' => NULL,
+      ),
+    ),
+  );
+}
+
+/**
  * Page callback for /costbenefit/ID.
  */
 function costbenefit_view_entity($entity) {

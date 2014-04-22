@@ -124,6 +124,9 @@ function costbenefit_item_edit_form($form, &$form_state, $item) {
     '#type' => 'submit',
     '#value' => 'Update Item',
   );
+  $form['footer'] = array(
+    '#markup' => l('Delete this item', 'cb/' . $item->cb_id . '/' . $item->cb_item_id . '/delete'),
+  );
   return $form;
 }
 
@@ -137,4 +140,51 @@ function costbenefit_item_edit_form_submit($form, &$form_state) {
   $entity->title = $form_state['values']['title'];
   $entity->save();
   $form_state['redirect'] = 'cb/' . $entity->cb_id;
+}
+
+/**
+ * Form constructor for a reportback delete form.
+ *
+ * @param object $entity
+ *   The costbenefititem entity to delete.
+ *
+ * @ingroup forms
+ */
+function costbenefit_item_delete_form($form, &$form_state, $entity) {
+  $form['cb_item_id'] = array(
+    '#type' => 'hidden',
+    '#value' => $entity->cb_item_id,
+    '#access' => FALSE,
+  );
+  $form['cb_id'] = array(
+    '#type' => 'hidden',
+    '#value' => $entity->cb_id,
+    '#access' => FALSE,
+  );
+  $form['title'] = array(
+    '#type' => 'hidden',
+    '#value' => $entity->title,
+    '#access' => FALSE,
+  );
+  $form['warning'] = array(
+    '#markup' => t("Are you sure you want to delete this item?  This cannot be undone."),
+  );
+  $form['actions'] = array(
+    '#type' => 'actions',
+    'submit' => array(
+      '#type' => 'submit',
+      '#value' => t('Delete'),
+    ),
+  );
+  return $form;
+}
+
+/**
+ * Submit callback for dosomething_reportback_delete_form().
+ */
+function costbenefit_item_delete_form_submit($form, &$form_state) {
+  $cb_item_id = $form_state['values']['cb_item_id'];
+  entity_delete('costbenefit_item', $cb_item_id);
+  $form_state['redirect'] = 'cb/' . $form_state['values']['cb_id'];
+  drupal_set_message("Item " . $form_state['values']['title'] . " deleted.");
 }

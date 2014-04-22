@@ -16,7 +16,7 @@ function costbenefit_menu() {
   );
   $items['cb/%costbenefit'] = array(
     'title callback' => 'costbenefit_get_title',
-    'title arguments' => array(1),
+    'title arguments' => array('view', 1),
     'page callback' => 'costbenefit_view_entity',
     'page arguments' => array(1),
     //@todo: Access callback to only allow authors.
@@ -24,7 +24,7 @@ function costbenefit_menu() {
   );
   $items['cb/%costbenefit/edit'] = array(
     'title callback' => 'costbenefit_get_title',
-    'title arguments' => array(1),
+    'title arguments' => array('edit', 1),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_form', 1),
     //@todo: Access callback to only allow authors.
@@ -45,10 +45,18 @@ function costbenefit_menu() {
     'access callback' => 'user_is_logged_in',
     'file' => 'costbenefit.forms.inc',
   );
-  $items['cb-item/%costbenefit_item'] = array(
-    'title' => 'Edit Item',
+  $items['cb/%costbenefit/%costbenefit_item'] = array(
+    'title callback' => 'costbenefit_get_title',
+    'title arguments' => array('view' , 2),
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('costbenefit_item_edit_form', 1),
+    'page arguments' => array('costbenefit_item_edit_form', 2),
+    'access callback' => 'user_is_logged_in',
+    'file' => 'costbenefit.forms.inc',
+  );
+  $items['cb/%costbenefit/%costbenefit_item/delete'] = array(
+    'title' => 'Delete',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('costbenefit_item_delete_form', 2),
     'access callback' => 'user_is_logged_in',
     'file' => 'costbenefit.forms.inc',
   );
@@ -128,6 +136,10 @@ function costbenefit_view_entity($entity) {
 /**
  * Title callback for /costbenefit/ID.
  */
-function costbenefit_get_title($entity) {
-  return $entity->title;
+function costbenefit_get_title($op, $entity) {
+  if ($op == 'view') {
+    return $entity->title;
+  }
+  return $op . ' ' . $entity->title;
+  
 }

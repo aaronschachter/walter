@@ -12,6 +12,7 @@ function costbenefit_menu() {
   $items['home'] = array(
     'page callback' => 'costbenefit_home_page',
     'access callback' => TRUE,
+    'file' => 'costbenefit.pages.inc',
   );
   $items['cb/%costbenefit'] = array(
     'title callback' => 'costbenefit_get_title',
@@ -28,12 +29,14 @@ function costbenefit_menu() {
     'page arguments' => array('costbenefit_form', 1),
     //@todo: Access callback to only allow authors.
     'access callback' => 'user_is_logged_in',
+    'file' => 'costbenefit.forms.inc',
   );
   $items['cb/add'] = array(
     'title' => 'New Cost-Benefit Matrix',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_form', NULL),
     'access callback' => 'user_is_logged_in',
+    'file' => 'costbenefit.forms.inc',
   );
   return $items;
 }
@@ -78,73 +81,4 @@ function costbenefit_view_entity($entity) {
  */
 function costbenefit_get_title($entity) {
   return $entity->title;
-}
-
-
-/**
- * Form constructor for Costbenefit entity add/edit.
- */
-function costbenefit_form($form, &$form_state, $entity = NULL) {
-  $label = t('Create');
-  if ($entity) {
-    $form['cb_id'] = array(
-      '#type' => 'hidden',
-      '#value' => $entity->cb_id,
-      '#access' => FALSE,
-    );
-    $label = t('Update');
-  }
-  $form['title'] = array(
-    '#title' => t('The substance or activity to consider is:'),
-    '#type' => 'textfield',
-    '#required' => TRUE,
-    '#default_value' => isset($entity->title) ? $entity->title : NULL,
-  );
-  // Provide a submit button.
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => $label,
-  );
-  return $form;
-}
-
-/**
- * Submit callback for costbenefit_form().
- */
-function costbenefit_form_submit($form, &$form_state) {
-  global $user;
-  $values = array(
-    'title' => $form_state['values']['title'],
-    'uid' => $user->uid,
-  );
-  if (isset($form_state['values']['cb_id'])) {
-    $entity = costbenefit_load($form_state['values']['cb_id']);
-    $entity->title = $form_state['values']['title'];
-  }
-  else {
-    $entity = entity_create('costbenefit', $values);    
-  }
-  $entity->save();
-  $form_state['redirect'] = 'cb/' . $entity->cb_id;
-}
-
-/**
- * Page callback for /home.
- */
-function costbenefit_home_page() {
-  $output = '';
-  if (user_is_logged_in()) {
-    $output .= '<p class="text-right">';
-    $output .= l('Create new', 'cb/add', array(
-      'attributes' => array(
-        'class' => 'btn btn-primary',
-      )
-    ));
-    $output .= '</p>';
-    $output .= views_embed_view('cb_list', 'default');
-  }
-  else {
-    $output .= t('Please sign in.');
-  }
-  return $output;
 }

@@ -19,16 +19,16 @@ function costbenefit_menu() {
     'title arguments' => array('view', 1),
     'page callback' => 'costbenefit_view_entity',
     'page arguments' => array(1),
-    //@todo: Access callback to only allow authors.
-    'access callback' => 'user_is_logged_in',
+    'access callback' => 'costbenefit_access',
+    'access arguments' => array(1),
   );
   $items['cb/%costbenefit/edit'] = array(
     'title callback' => 'costbenefit_get_title',
     'title arguments' => array('edit', 1),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_form', 1),
-    //@todo: Access callback to only allow authors.
-    'access callback' => 'user_is_logged_in',
+    'access callback' => 'costbenefit_access',
+    'access arguments' => array(1),
     'file' => 'costbenefit.forms.inc',
   );
   $items['cb/add'] = array(
@@ -42,7 +42,8 @@ function costbenefit_menu() {
     'title' => 'Add Item',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_item_add_form', 1, 2),
-    'access callback' => 'user_is_logged_in',
+    'access callback' => 'costbenefit_access',
+    'access arguments' => array(1),
     'file' => 'costbenefit.forms.inc',
   );
   $items['cb/%costbenefit/%costbenefit_item'] = array(
@@ -50,14 +51,16 @@ function costbenefit_menu() {
     'title arguments' => array('view' , 2),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_item_edit_form', 2),
-    'access callback' => 'user_is_logged_in',
+    'access callback' => 'costbenefit_access',
+    'access arguments' => array(1),
     'file' => 'costbenefit.forms.inc',
   );
   $items['cb/%costbenefit/%costbenefit_item/delete'] = array(
     'title' => 'Delete',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_item_delete_form', 2),
-    'access callback' => 'user_is_logged_in',
+    'access callback' => 'costbenefit_access',
+    'access arguments' => array(1),
     'file' => 'costbenefit.forms.inc',
   );
   return $items;
@@ -141,5 +144,18 @@ function costbenefit_get_title($op, $entity) {
     return $entity->title;
   }
   return $op . ' ' . $entity->title;
-  
+}
+
+/**
+ * Access callback for costbenefit and costbenefit_item pages.
+ */
+function costbenefit_access($entity) {
+  global $user;
+  if ($user->uid == 1) {
+    return TRUE;
+  }
+  dsm($entity->uid);
+  //print '</pre>' . print_r($entity) . '</pre>';
+  //@todo: Fix bug: Notice: Trying to get property of non-object.
+  return $user->uid == $entity->uid;
 }

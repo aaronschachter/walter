@@ -51,3 +51,49 @@ function costbenefit_form_submit($form, &$form_state) {
   $entity->save();
   $form_state['redirect'] = 'cb/' . $entity->cb_id;
 }
+
+/**
+ * Form constructor for Costbenefit Item entity add/edit.
+ *
+ * @param object $cb
+ *   The cost-benefit entity to add a cb-item to.
+ * @param int $box
+ *   The box number the cb-item belongs to.
+ */
+function costbenefit_item_form($form, &$form_state, $cb, $box) {
+  $form['cb_id'] = array(
+    '#type' => 'hidden',
+    '#value' => $cb->cb_id,
+    '#access' => FALSE,
+  );
+  $form['box'] = array(
+    '#type' => 'hidden',
+    '#value' => $box,
+  );
+  $form['header'] = array(
+    '#markup' => 'Box ' . $box,
+  );
+  $form['title'] = array(
+    '#title' => t('Title:'),
+    '#type' => 'textfield',
+    '#required' => TRUE,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Add Item',
+  );
+  return $form;
+}
+
+/**
+ * Submit callback for costbenefit_item_form().
+ */
+function costbenefit_item_form_submit($form, &$form_state) {
+  global $user;
+  $entity = entity_create('costbenefit_item', array());
+  $entity->cb_id = $form_state['values']['cb_id'];  
+  $entity->box = $form_state['values']['box'];
+  $entity->title = $form_state['values']['title'];
+  $entity->save();
+  $form_state['redirect'] = 'cb/' . $entity->cb_id;
+}

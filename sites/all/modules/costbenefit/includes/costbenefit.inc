@@ -9,12 +9,27 @@
  * Our Costbenefit entity class.
  */
 class CostbenefitEntity extends Entity {
+  protected $item_table = 'costbenefit_item';
 
   /**
    * Override this in order to implement a custom default URI.
    */
   protected function defaultUri() {
     return array('path' => 'cb/' . $this->identifier());
+  }
+
+  public function getBoxItems($box) {
+    $items = array();
+    $query = db_select($this->item_table, 'cbi')
+      ->fields('cbi', array('cb_item_id', 'title'))
+      ->condition('cb_id', $this->cb_id)
+      ->condition('box', $box);
+    $results = $query->execute();
+    foreach($results as $seq => $result) {
+      $items[$seq]['cb_item_id'] = $result->cb_item_id;
+      $items[$seq]['title'] = $result->title;
+    }
+    return $items;
   }
 }
 
@@ -30,35 +45,51 @@ class CostbenefitEntityController extends EntityAPIController {
    */
   public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {
     $build = parent::buildContent($entity, $view_mode, $langcode, $content);
+    $box_items = array();
+    // Loop through the boxes.
+    for ($i = 1; $i <= 4; $i++) {
+      $box_items[$i] = $entity->getBoxItems($i);
+      $add_item_path = 'cb/' . $entity->cb_id . '/' . $i . '/add';
+      $build['box_' . $i] = array(
+        '#prefix' => '<h2 class="text-center">Box ' . $i . '</h2>',
+        '#markup' => print_r($box_items[$i], TRUE),
+        '#suffix' => l('Add Item', $add_item_path),
+      );
+    }
+    /*
     $build['doing_header'] = array(
       '#prefix' => '<h2 class="text-center">',
       '#markup' => t('Doing or using'),
       '#suffix' => '</h2>',
-    );
-    $build['doing_matrix'] = array(
-      '#markup' => '
-<div class="row">
-  <div class="col-xs-6 well"><h3 class="text-center">Advantages</h3>
-  <ul>
-    <li>Stuff</li>
-    <li>More stuff</li>
-  </ul>
-  </div>
-  <div class="col-xs-6 well"><h3 class="text-center">Disadvantages</h3></div>
-</div>',
     );
     $build['not_doing_header'] = array(
       '#prefix' => '<h2 class="text-center">',
       '#markup' => t('NOT doing or NOT using'),
       '#suffix' => '</h2>',
     );
-    $build['not_doing_matrix'] = array(
-      '#markup' => '
-<div class="row">
-  <div class="col-xs-6 well"><h3 class="text-center">Advantages</h3></div>
-  <div class="col-xs-6 well"><h3 class="text-center">Disadvantages</h3></div>
-</div>',
-    );
+    */
     return $build;
   }
 }
+
+
+/**
+ * Our Costbenefit Item entity class.
+ */
+class CostbenefitItemEntity extends Entity {
+
+  /**
+   * Override this in order to implement a custom default URI.
+   */
+  protected function defaultUri() {
+    return array('path' => 'cb-item/' . $this->identifier());
+  }
+}
+
+/**
+ * Our custom controller for the Costbenefit entity.
+ */
+class CostbenefitItemEntityController extends EntityAPIController {
+
+}
+

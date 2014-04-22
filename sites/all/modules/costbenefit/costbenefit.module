@@ -38,6 +38,13 @@ function costbenefit_menu() {
     'access callback' => 'user_is_logged_in',
     'file' => 'costbenefit.forms.inc',
   );
+  $items['cb/%costbenefit/%/add'] = array(
+    'title' => 'New Cost-Benefit Item',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('costbenefit_item_form', 1, 2),
+    'access callback' => 'user_is_logged_in',
+    'file' => 'costbenefit.forms.inc',
+  );
   return $items;
 }
 
@@ -56,6 +63,18 @@ function costbenefit_entity_info() {
     'entity class' => 'CostbenefitEntity',
     'uri callback' => 'entity_class_uri',
     'controller class' => 'CostbenefitEntityController',
+    'module' => 'costbenefit',
+  );
+  $info['costbenefit_item'] = array(
+    'label' => t('Cost-Benefit Item'),
+    'base table' => 'costbenefit_item',
+    'entity keys' => array(
+      'id' => 'cb_item_id',
+      'label' => 'title',
+    ),
+    'entity class' => 'CostbenefitItemEntity',
+    'uri callback' => 'entity_class_uri',
+    'controller class' => 'CostbenefitItemEntityController',
     'module' => 'costbenefit',
   );
   return $info;

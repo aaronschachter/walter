@@ -57,16 +57,10 @@ class CostbenefitEntityController extends EntityAPIController {
         'items' => $entity->getBoxItems($i),
         'link' => l('Add Item', 'cb/' . $entity->cb_id . '/' . $i . '/add'),
       );
-      $boxes[$i] = theme('costbenefit_box', array('vars' => $vars));
+      $build['boxes'][$i] = array(
+        '#markup' => theme('costbenefit_box', array('vars' => $vars)),
+      );
     }
-    $build['doing'] = array(
-      '#prefix' => '<h2 class="text-center">Doing or using</h2>',
-      '#markup' => '
-        <div class="admin clearfix">
-          <div class="left clearfix">' . $boxes[1] . '</div>
-          <div class="right clearfix">' . $boxes[2] . '</div>
-        </div>',
-    );
     return $build;
   }
 

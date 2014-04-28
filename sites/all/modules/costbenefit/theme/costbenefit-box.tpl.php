@@ -4,12 +4,11 @@
 */
 ?>
 <div>
-  <table class="table table-striped">
+  <table class="table table-striped table-bordered">
     <thead>
       <tr>
-      <th><?php print _costbenefit_get_box_type($vars['box']) ?> 
-        <a href="/<?php print $vars['link']; ?>" role="button" class="btn btn-default">+</a></th>
-      <th></th>
+      <th colspan="2"><?php print _costbenefit_get_box_type($vars['box']) ?> 
+        <a href="/<?php print $vars['link']; ?>" role="button" class="btn btn-default pull-right">+</a></th>
       </tr>
     </thead>
     <tbody>
@@ -19,7 +18,6 @@
         <td><?php print $item->type_desc; ?></td>
       </tr>
     <?php endforeach; ?>
-    <tr><td></td><td>  </td></tr>
     </tbody>
   </table>
 </div>

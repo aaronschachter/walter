@@ -55,7 +55,7 @@ class CostbenefitEntityController extends EntityAPIController {
         'cb_id' => $entity->cb_id,
         'box' => $i,
         'items' => $entity->getBoxItems($i),
-        'link' => l('Add Item', 'cb/' . $entity->cb_id . '/' . $i . '/add'),
+        'link' => 'cb/' . $entity->cb_id . '/' . $i . '/add',
       );
       $build['boxes'][$i] = array(
         '#markup' => theme('costbenefit_box', array('vars' => $vars)),

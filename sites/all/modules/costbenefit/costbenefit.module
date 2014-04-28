@@ -130,6 +130,19 @@ function costbenefit_theme($existing, $type, $theme, $path) {
 }
 
 /**
+ * Process variables for entity.tpl.php.
+ *
+ * @see template_preprocess_entity in Entity API module.
+ */
+function costbenefit_preprocess_entity(&$variables) {
+  if ($variables['elements']['#entity_type'] == 'costbenefit' && $variables['view_mode'] == 'full') {
+    // Enables costbenefit.tpl.php naming suggestion.
+    $variables['theme_hook_suggestions'][] = 'costbenefit';
+    $entity = $variables['elements']['#entity'];
+  }
+}
+
+/**
  * Page callback for /costbenefit/ID.
  */
 function costbenefit_view_entity($entity) {

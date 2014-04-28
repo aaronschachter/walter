@@ -4,11 +4,12 @@
 */
 ?>
 <div>
-  <table class="views-table">
+  <table class="table table-striped">
     <thead>
       <tr>
-      <th><?php print _costbenefit_get_box_type($vars['box']) ?> <?php print $vars['link']; ?></th>
-      <th>Type</th>
+      <th><?php print _costbenefit_get_box_type($vars['box']) ?> 
+        <a href="/<?php print $vars['link']; ?>" role="button" class="btn btn-default">+</a></th>
+      <th></th>
       </tr>
     </thead>
     <tbody>

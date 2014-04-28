@@ -48,12 +48,7 @@ class CostbenefitEntityController extends EntityAPIController {
    */
   public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {
     $build = parent::buildContent($entity, $view_mode, $langcode, $content);
-    $build['doing_header'] = array(
-      '#prefix' => '<h2 class="text-center">',
-      '#markup' => t('Doing or using'),
-      '#suffix' => '</h2>',
-    );
-    $box_items = array();
+    $boxes = array();
     // Loop through the boxes.
     for ($i = 1; $i <= 4; $i++) {
       $vars = array(
@@ -62,17 +57,16 @@ class CostbenefitEntityController extends EntityAPIController {
         'items' => $entity->getBoxItems($i),
         'link' => l('Add Item', 'cb/' . $entity->cb_id . '/' . $i . '/add'),
       );
-      $build['box_' . $i] = array(
-        '#markup' => theme('costbenefit_box', array('vars' => $vars))
-      );
-      if ($i == 2) {
-        $build['not_doing_header'] = array(
-          '#prefix' => '<h2 class="text-center">',
-          '#markup' => t('NOT doing or NOT using'),
-          '#suffix' => '</h2>',
-        );
-      }
+      $boxes[$i] = theme('costbenefit_box', array('vars' => $vars));
     }
+    $build['doing'] = array(
+      '#prefix' => '<h2 class="text-center">Doing or using</h2>',
+      '#markup' => '
+        <div class="admin clearfix">
+          <div class="left clearfix">' . $boxes[1] . '</div>
+          <div class="right clearfix">' . $boxes[2] . '</div>
+        </div>',
+    );
     return $build;
   }
 

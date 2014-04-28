@@ -1,4 +1,5 @@
 name = Cost Benefit
 description = Provides Cost-Benefit entity functionality.
 core = 7.x
+dependencies[] = ctools
 files[] = includes/costbenefit.inc

@@ -49,8 +49,9 @@ function costbenefit_menu() {
     'file' => 'costbenefit.forms.inc',
   );
   $items['cb/%costbenefit/%costbenefit_item'] = array(
-    'title callback' => '_costbenefit_get_box_type',
-    'title arguments' => array(2),
+    // 'title callback' => '_costbenefit_get_box_type',
+    // 'title arguments' => array(2),
+    'title' => 'Item',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_item_edit_form', 2),
     'access callback' => 'costbenefit_access',

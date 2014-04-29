@@ -108,13 +108,15 @@ function costbenefit_item_add_form_submit($form, &$form_state) {
  *   The cost-benefit entity the cb-item belongs to.
  */
 function costbenefit_item_edit_form($form, &$form_state, $item) {
+  // Hack the system, since we can't access box label from URL as title callback.
+  drupal_set_title(_costbenefit_get_box_label($item->box));
   $form['cb_item_id'] = array(
     '#type' => 'hidden',
     '#value' => $item->cb_item_id,
     '#access' => FALSE,
   );
   $form['title'] = array(
-    '#title' => _costbenefit_get_box_label($item->box),
+    '#title' => 'A ' . _costbenefit_get_box_label($item->box, FALSE) . ' is:',
     '#type' => 'textfield',
     '#required' => TRUE,
     '#default_value' => $item->title,

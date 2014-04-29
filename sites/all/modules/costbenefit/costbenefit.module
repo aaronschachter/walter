@@ -38,17 +38,19 @@ function costbenefit_menu() {
     'access callback' => 'user_is_logged_in',
     'file' => 'costbenefit.forms.inc',
   );
-  $items['cb/%costbenefit/%/add'] = array(
-    'title' => 'Add Item',
+  // Pass box number as parameter to the add cb_matrix_item page.
+  $items['cb/%costbenefit/add/%'] = array(
+    'title callback' => '_costbenefit_get_box_label',
+    'title arguments' => array(3),
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('costbenefit_item_add_form', 1, 2),
+    'page arguments' => array('costbenefit_item_add_form', 1, 3),
     'access callback' => 'costbenefit_access',
     'access arguments' => array(1),
     'file' => 'costbenefit.forms.inc',
   );
   $items['cb/%costbenefit/%costbenefit_item'] = array(
-    'title callback' => 'costbenefit_get_title',
-    'title arguments' => array('view' , 2),
+    'title callback' => '_costbenefit_get_box_type',
+    'title arguments' => array(2),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_item_edit_form', 2),
     'access callback' => 'costbenefit_access',
@@ -182,20 +184,23 @@ function costbenefit_access($entity) {
 /**
  * Returns the costbenefit box label based on given number $box.
  */
-function _costbenefit_get_box_label($box) {
-  $type = _costbenefit_get_box_type($box, FALSE);
+function _costbenefit_get_box_label($box, $plural = TRUE, $title = NULL) {
+  $type = _costbenefit_get_box_type($box, $plural);
   $action = 'using';
   if ($box > 2) {
-    $action = 'not using';
+    $action = 'NOT using';
   }
-  return $type . ' of ' . $action;
+  if ($title) {
+    $title = ' ' . $title;
+  }
+  return $type . ' of ' . $action . $title;
 }
 
 function _costbenefit_get_box_type($box, $plural = TRUE) {
-  $type = 'Advantage';
+  $type = 'Pro';
   // If box number is even:
   if ($box % 2 == 0) {
-    $type = 'Disadvantage';
+    $type = 'Con';
   }
   if ($plural) {
     $type .= 's';

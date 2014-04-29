@@ -42,7 +42,7 @@ function costbenefit_form_submit($form, &$form_state) {
   }
   // Else create a new entity to save.
   else {
-    $entity = entity_create('costbenefit', array());    
+    $entity = entity_create('costbenefit', array());
   }
   $entity->title = $form_state['values']['title'];
   $entity->save();
@@ -58,16 +58,19 @@ function costbenefit_form_submit($form, &$form_state) {
  *   The box number the cb-item belongs to.
  */
 function costbenefit_item_add_form($form, &$form_state, $cb, $box) {
+  $label = 'A ' . _costbenefit_get_box_label($box, FALSE, $cb->title) . ' is:';
   $form['cb_id'] = array(
     '#type' => 'hidden',
     '#value' => $cb->cb_id,
     '#access' => FALSE,
   );
-  $form['header'] = array(
-    '#markup' => 'Box ' . $box,
+  $form['box'] = array(
+    '#type' => 'hidden',
+    '#value' => $box,
+    '#access' => FALSE,
   );
   $form['title'] = array(
-    '#title' => _costbenefit_get_box_label($box),
+    '#title' => $label,
     '#type' => 'textfield',
     '#required' => TRUE,
   );
@@ -89,7 +92,7 @@ function costbenefit_item_add_form($form, &$form_state, $cb, $box) {
 function costbenefit_item_add_form_submit($form, &$form_state) {
   global $user;
   $entity = entity_create('costbenefit_item', array());
-  $entity->cb_id = $form_state['values']['cb_id'];  
+  $entity->cb_id = $form_state['values']['cb_id'];
   $entity->box = $form_state['values']['box'];
   $entity->title = $form_state['values']['title'];
   $entity->type = $form_state['values']['type'];
@@ -109,9 +112,6 @@ function costbenefit_item_edit_form($form, &$form_state, $item) {
     '#type' => 'hidden',
     '#value' => $item->cb_item_id,
     '#access' => FALSE,
-  );
-  $form['header'] = array(
-    '#markup' => 'Box ' . $item->box,
   );
   $form['title'] = array(
     '#title' => _costbenefit_get_box_label($item->box),
@@ -140,7 +140,7 @@ function costbenefit_item_edit_form($form, &$form_state, $item) {
  */
 function costbenefit_item_edit_form_submit($form, &$form_state) {
   global $user;
-  $entity = costbenefit_item_load($form_state['values']['cb_item_id']); 
+  $entity = costbenefit_item_load($form_state['values']['cb_item_id']);
   $entity->title = $form_state['values']['title'];
   $entity->type = $form_state['values']['type'];
   $entity->save();

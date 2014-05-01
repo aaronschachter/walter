@@ -1,6 +1,12 @@
 <?php
 /**
  * @file
+ * Code for the costbenefit feature.
+ */
+
+include_once 'costbenefit.features.inc';
+/**
+ * @file
  * Code for the Costbenefit module.
  */
 

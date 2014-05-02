@@ -69,12 +69,15 @@ function costbenefit_item_add_form($form, &$form_state, $cb, $box) {
     '#value' => $box,
     '#access' => FALSE,
   );
-  $form['title'] = array(
+  $form['body'] = array(
+    '#type' => 'fieldset',
+  );
+  $form['body']['title'] = array(
     '#title' => $label,
     '#type' => 'textfield',
     '#required' => TRUE,
   );
-  $form['type'] = array(
+  $form['body']['type'] = array(
     '#type' => 'radios',
     '#required' => TRUE,
     '#options' => _costbenefit_get_type_options(),
@@ -82,6 +85,9 @@ function costbenefit_item_add_form($form, &$form_state, $cb, $box) {
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Add Item',
+    '#prefix' => '        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>',
+    '#suffix' => '</div>'
   );
   return $form;
 }

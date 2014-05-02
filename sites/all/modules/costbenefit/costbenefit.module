@@ -133,6 +133,7 @@ function costbenefit_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'costbenefit') . '/theme',
       'variables' => array(
         'vars' => NULL,
+        'add_form' => NULL,
       ),
     ),
   );

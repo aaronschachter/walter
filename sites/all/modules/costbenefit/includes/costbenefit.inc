@@ -47,6 +47,7 @@ class CostbenefitEntityController extends EntityAPIController {
    * Adds Costbenefit properties and items into the content array.
    */
   public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {
+    module_load_include('inc', 'costbenefit', 'costbenefit.forms');
     $build = parent::buildContent($entity, $view_mode, $langcode, $content);
     $boxes = array();
     // Loop through the boxes.
@@ -58,8 +59,12 @@ class CostbenefitEntityController extends EntityAPIController {
         'items' => $entity->getBoxItems($i),
         'link' => $link,
       );
+      $add_form = drupal_get_form('costbenefit_item_add_form', $entity, $i);
       $build['boxes'][$i] = array(
-        '#markup' => theme('costbenefit_box', array('vars' => $vars)),
+        '#markup' => theme('costbenefit_box', array(
+          'vars' => $vars,
+          'add_form' => $add_form,
+        )),
       );
     }
     return $build;

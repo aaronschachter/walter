@@ -10,7 +10,7 @@
       <th colspan="2">
         <?php print _costbenefit_get_box_type($vars['box']) ?>
         <span class="badge"><?php print count($vars['items']); ?></span>
-        <button class="btn btn-tertiary pull-right" data-toggle="modal" data-target=".bs-example-modal-<?php print $vars['box']; ?>">+</button>
+        <button class="btn btn-tertiary pull-right" data-toggle="modal" data-target=".add-item-modal-<?php print $vars['box']; ?>">+</button>
       </tr>
     </thead>
     <tbody>
@@ -22,7 +22,7 @@
     <?php endforeach; ?>
     </tbody>
   </table>
-  <div class="modal fade bs-example-modal-<?php print $vars['box']; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal fade add-item-modal-<?php print $vars['box']; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -32,12 +32,6 @@
         <div class="modal-body">
           <p><?php print render($add_form); ?></p>
         </div>
-        <?php /*
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-        */ ?>
       </div>
     </div>
   </div>

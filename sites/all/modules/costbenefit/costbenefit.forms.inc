@@ -62,12 +62,12 @@ function costbenefit_item_add_form($form, &$form_state, $cb, $box) {
   $form['cb_id'] = array(
     '#type' => 'hidden',
     '#value' => $cb->cb_id,
-    '#access' => FALSE,
+    //'#access' => FALSE,
   );
   $form['box'] = array(
     '#type' => 'hidden',
     '#value' => $box,
-    '#access' => FALSE,
+    //'#access' => FALSE,
   );
   $form['body'] = array(
     '#type' => 'fieldset',
@@ -82,13 +82,7 @@ function costbenefit_item_add_form($form, &$form_state, $cb, $box) {
     '#required' => TRUE,
     '#options' => _costbenefit_get_type_options(),
   );
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => 'Add Item',
-    '#prefix' => '        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>',
-    '#suffix' => '</div>'
-  );
+  $form['submit'] = _get_costbenefit_form_submit_element('Add');
   return $form;
 }
 
@@ -201,4 +195,13 @@ function costbenefit_item_delete_form_submit($form, &$form_state) {
   entity_delete('costbenefit_item', $cb_item_id);
   $form_state['redirect'] = 'cb/' . $form_state['values']['cb_id'];
   drupal_set_message("Item " . $form_state['values']['title'] . " deleted.");
+}
+
+function _get_costbenefit_form_submit_element($label) {
+  return array(
+    '#type' => 'submit',
+    '#value' => $label,
+    '#prefix' => '<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button>',
+    '#suffix' => '</div>'
+  );
 }

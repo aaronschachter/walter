@@ -112,7 +112,7 @@ function costbenefit_item_edit_form($form, &$form_state, $item) {
     //'#access' => FALSE,
   );
   $form['title'] = array(
-    '#title' => 'A ' . _costbenefit_get_box_label($item->box, FALSE) . ' is:',
+    '#title' => 'A ' . _costbenefit_get_box_label($item->box, FALSE, drupal_get_title()) . ' is:',
     '#type' => 'textfield',
     '#required' => TRUE,
     '#default_value' => $item->title,

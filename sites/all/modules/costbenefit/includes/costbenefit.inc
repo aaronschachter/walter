@@ -52,6 +52,7 @@ class CostbenefitEntityController extends EntityAPIController {
     module_load_include('inc', 'costbenefit', 'costbenefit.forms');
     $build = parent::buildContent($entity, $view_mode, $langcode, $content);
     $build['title'] = $entity->title;
+    $build['edit_form'] = drupal_get_form('costbenefit_form', $entity);
     $boxes = array();
     // Loop through the boxes.
     for ($i = 1; $i <= 4; $i++) {

@@ -59,7 +59,7 @@ class CostbenefitEntityController extends EntityAPIController {
         'items' => $entity->getBoxItems($i),
         'link' => $link,
       );
-      $add_form = drupal_get_form('costbenefit_item_add_form', $entity, $i);
+      $add_form = drupal_get_form('costbenefit_item_add_form_' . $i, $entity, $i);
       $build['boxes'][$i] = array(
         '#markup' => theme('costbenefit_box', array(
           'vars' => $vars,

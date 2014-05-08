@@ -183,6 +183,14 @@ function costbenefit_access($entity) {
   return $user->uid == $entity->uid;
 }
 
+function costbenefit_forms($form_id, $args) {
+  $forms = array();
+  if (substr($form_id, 0, 26) == 'costbenefit_item_add_form_') {
+    $forms[$form_id] = array('callback' => 'costbenefit_item_add_form');
+  }
+  return $forms;
+}
+
 /**
  * ------------------------------------------------------------
  * HELPERS

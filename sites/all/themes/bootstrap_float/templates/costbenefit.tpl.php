@@ -1,4 +1,5 @@
-<?php print l('Edit', 'cb/' . arg(1) . '/edit'); ?>
+<h1 class="page-header"><?php print $title ; ?></h1>
+<div class="pull-right"><?php print l('Edit', 'cb/' . arg(1) . '/edit'); ?></div>
 
 <div class="row">
   <div class="col-xs-6"><?php print render($content['boxes'][1]); ?></div>

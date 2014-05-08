@@ -51,6 +51,7 @@ class CostbenefitEntityController extends EntityAPIController {
   public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {
     module_load_include('inc', 'costbenefit', 'costbenefit.forms');
     $build = parent::buildContent($entity, $view_mode, $langcode, $content);
+    $build['title'] = $entity->title;
     $boxes = array();
     // Loop through the boxes.
     for ($i = 1; $i <= 4; $i++) {

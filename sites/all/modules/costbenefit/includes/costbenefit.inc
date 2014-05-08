@@ -29,8 +29,10 @@ class CostbenefitEntity extends Entity {
       ->condition('box', $box);
     $result = $query->execute()->fetchAll();
     foreach ($result as $delta => $record) {
+      $item_entity = costbenefit_item_load($record->cb_item_id);
       $items[$delta] = $record;
       $items[$delta]->type_desc = $record->type ? 'Long term' : 'Short term';
+      $items[$delta]->form = drupal_get_form('costbenefit_item_edit_form', $item_entity);
     }
     return $items;
   }

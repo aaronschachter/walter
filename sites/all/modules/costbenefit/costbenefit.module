@@ -183,10 +183,16 @@ function costbenefit_access($entity) {
   return $user->uid == $entity->uid;
 }
 
+/**
+ * Implements hook_forms().
+ */
 function costbenefit_forms($form_id, $args) {
   $forms = array();
   if (substr($form_id, 0, 26) == 'costbenefit_item_add_form_') {
     $forms[$form_id] = array('callback' => 'costbenefit_item_add_form');
+  }
+  elseif (substr($form_id, 0, 27) == 'costbenefit_item_edit_form_') {
+    $forms[$form_id] = array('callback' => 'costbenefit_item_edit_form');
   }
   return $forms;
 }

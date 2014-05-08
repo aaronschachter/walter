@@ -24,11 +24,7 @@ function costbenefit_form($form, &$form_state, $entity = NULL) {
     '#required' => TRUE,
     '#default_value' => isset($entity->title) ? $entity->title : NULL,
   );
-  // Provide a submit button.
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => $label,
-  );
+  $form['submit'] = _get_costbenefit_form_submit_element('Update');
   return $form;
 }
 

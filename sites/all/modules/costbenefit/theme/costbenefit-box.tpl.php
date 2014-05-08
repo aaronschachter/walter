@@ -5,7 +5,9 @@
       <th colspan="2">
         <?php print _costbenefit_get_box_label($vars['box'], TRUE, 'Procrastination') ?>
         <span class="badge"><?php print count($vars['items']); ?></span>
-        <button class="btn btn-tertiary pull-right" data-toggle="modal" data-target=".add-item-modal-<?php print $vars['box']; ?>">+</button>
+        <button class="btn btn-tertiary pull-right" data-toggle="modal" data-target=".add-item-modal-<?php print $vars['box']; ?>">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
       </tr>
     </thead>
     <tbody>

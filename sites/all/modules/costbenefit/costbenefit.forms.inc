@@ -112,8 +112,10 @@ function costbenefit_item_edit_form($form, &$form_state, $item) {
   drupal_set_title(_costbenefit_get_box_label($item->box));
   $form['cb_item_id'] = array(
     '#type' => 'hidden',
-    '#value' => $item->cb_item_id,
-    '#access' => FALSE,
+    // And this has to be default_value, not value to get the mutiple forms working.
+    '#default_value' => $item->cb_item_id,
+    // This breaks the whole multiple form thing.
+    //'#access' => FALSE,
   );
   $form['title'] = array(
     '#title' => 'A ' . _costbenefit_get_box_label($item->box, FALSE) . ' is:',
@@ -142,12 +144,13 @@ function costbenefit_item_edit_form($form, &$form_state, $item) {
  */
 function costbenefit_item_edit_form_submit($form, &$form_state) {
   global $user;
-  $entity = costbenefit_item_load($form_state['values']['cb_item_id']);
+  $cb_item_id = $form_state['values']['cb_item_id'];
+  $entity = costbenefit_item_load($cb_item_id);
   $entity->title = $form_state['values']['title'];
   $entity->type = $form_state['values']['type'];
   $entity->save();
   $form_state['redirect'] = 'cb/' . $entity->cb_id;
-  drupal_set_message("Item " . $entity->title . " has been updated.");
+  drupal_set_message("Item <em>" . $entity->title . "</em> has been updated.");
 }
 
 /**

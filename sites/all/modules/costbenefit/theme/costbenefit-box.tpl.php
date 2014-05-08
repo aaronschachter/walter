@@ -16,12 +16,35 @@
     <tbody>
     <?php foreach ($vars['items'] as $item): ?>
       <tr>
-        <td><?php print l($item->title, 'cb/' . $vars['cb_id'] . '/' . $item->cb_item_id); ?></td>
+        <td>
+          <a data-toggle="modal" data-target=".edit-item-modal-<?php print $item->cb_item_id; ?>"><?php print $item->title; ?></a>
+          <?php //print l($item->title, 'cb/' . $vars['cb_id'] . '/' . $item->cb_item_id); ?>
+
+  <!-- Edit item modal -->
+  <div class="modal fade edit-item-modal-<?php print $item->cb_item_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Edit</h4>
+        </div>
+        <div class="modal-body">
+          <p><?php print render($item->form); ?></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+        </td>
         <td><?php print $item->type_desc; ?></td>
       </tr>
     <?php endforeach; ?>
     </tbody>
   </table>
+
+  <!-- Add item modal -->
   <div class="modal fade add-item-modal-<?php print $vars['box']; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -35,4 +58,7 @@
       </div>
     </div>
   </div>
+
+
+
 </div>

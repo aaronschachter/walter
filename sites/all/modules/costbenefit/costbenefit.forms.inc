@@ -108,8 +108,6 @@ function costbenefit_item_add_form_submit($form, &$form_state) {
  *   The cost-benefit entity the cb-item belongs to.
  */
 function costbenefit_item_edit_form($form, &$form_state, $item) {
-  // Hack the system, since we can't access box label from URL as title callback.
-  drupal_set_title(_costbenefit_get_box_label($item->box));
   $form['cb_item_id'] = array(
     '#type' => 'hidden',
     // And this has to be default_value, not value to get the mutiple forms working.

@@ -129,13 +129,10 @@ function costbenefit_item_edit_form($form, &$form_state, $item) {
     '#options' => _costbenefit_get_type_options(),
     '#default_value' => $item->type,
   );
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => 'Update Item',
-  );
-  $form['footer'] = array(
-    '#markup' => l('Delete this item', 'cb/' . $item->cb_id . '/' . $item->cb_item_id . '/delete'),
-  );
+  $form['submit'] = _get_costbenefit_form_submit_element('Update');
+  // $form['footer'] = array(
+  //   '#markup' => l('Delete this item', 'cb/' . $item->cb_id . '/' . $item->cb_item_id . '/delete'),
+  // );
   return $form;
 }
 

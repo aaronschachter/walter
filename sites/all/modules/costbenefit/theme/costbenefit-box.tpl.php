@@ -17,8 +17,7 @@
     <?php foreach ($vars['items'] as $item): ?>
       <tr>
         <td>
-          <a data-toggle="modal" data-target=".edit-item-modal-<?php print $item->cb_item_id; ?>"><?php print $item->title; ?></a>
-          <?php //print l($item->title, 'cb/' . $vars['cb_id'] . '/' . $item->cb_item_id); ?>
+          <a class="edit-cb_item-link" data-toggle="modal" data-target=".edit-item-modal-<?php print $item->cb_item_id; ?>"><?php print $item->title; ?></a>
 
   <!-- Edit item modal -->
   <div class="modal fade edit-item-modal-<?php print $item->cb_item_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

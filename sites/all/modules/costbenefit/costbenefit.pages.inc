@@ -9,7 +9,9 @@
  * Page callback for /home.
  */
 function costbenefit_home_page() {
-  if (!user_is_logged_in()) { return t('Please sign in.'); }
+  if (!user_is_logged_in()) { 
+    return theme('costbenefit_front'); 
+  }
 
   $list = views_embed_view('cb_list', 'default');
   $add_form = drupal_get_form('costbenefit_form', NULL);

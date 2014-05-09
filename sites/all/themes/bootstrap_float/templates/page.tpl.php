@@ -72,6 +72,7 @@
  *
  * @ingroup themeable
  */
+global $user;
 ?>
 <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
   <div class="container">
@@ -95,18 +96,13 @@
       </button>
     </div>
 
-    <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
+    <?php if (user_is_logged_in()): ?>
       <div class="navbar-collapse collapse pull-right">
         <nav role="navigation">
-          <?php if (!empty($primary_nav)): ?>
-            <?php print render($primary_nav); ?>
-          <?php endif; ?>
-          <?php if (!empty($secondary_nav)): ?>
-            <?php print render($secondary_nav); ?>
-          <?php endif; ?>
-          <?php if (!empty($page['navigation'])): ?>
-            <?php print render($page['navigation']); ?>
-          <?php endif; ?>
+          <ul class="menu nav navbar-nav">
+            <li><?php print l($user->mail, 'user/'. $user->uid . '/edit'); ?></li>
+            <li><?php print l('Logout', 'user/logout'); ?></li>
+          </ul>
         </nav>
       </div>
     <?php endif; ?>

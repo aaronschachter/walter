@@ -1,4 +1,11 @@
-Walter is an app for creating and storing a Cost Benefit Analysis.
+<header role="banner" id="page-header">
+  <p class="lead">Walter is an app for creating and storing a Cost Benefit Analysis.</p>
+</header> <!-- /#page-header -->
+
+<div class="highlighted jumbotron">
+  <p class="lead">Lorem ipsum</p>
+  <div>Lorem ipsum dolor and things and then what else.</div>
+</div>
 
 <div class="row">
   <div class="col-xs-6">

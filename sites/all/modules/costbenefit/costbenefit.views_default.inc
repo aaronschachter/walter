@@ -52,6 +52,7 @@ function costbenefit_views_default_views() {
   $handler->display->display_options['fields']['updated']['id'] = 'updated';
   $handler->display->display_options['fields']['updated']['table'] = 'costbenefit';
   $handler->display->display_options['fields']['updated']['field'] = 'updated';
+  $handler->display->display_options['fields']['updated']['label'] = 'Updated';
   $handler->display->display_options['fields']['updated']['date_format'] = 'custom';
   $handler->display->display_options['fields']['updated']['custom_date_format'] = 'F j';
   /* Contextual filter: User: Uid */

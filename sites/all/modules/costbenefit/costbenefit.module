@@ -5,10 +5,7 @@
  */
 
 include_once 'costbenefit.features.inc';
-/**
- * @file
- * Code for the Costbenefit module.
- */
+include_once 'costbenefit.forms.inc';
 
 /**
  * Implements hook_menu().
@@ -133,6 +130,14 @@ function costbenefit_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'costbenefit') . '/theme',
       'variables' => array(
         'vars' => NULL,
+        'add_form' => NULL,
+      ),
+    ),
+    'costbenefit_list' => array(
+      'template' => 'costbenefit-list',
+      'path' => drupal_get_path('module', 'costbenefit') . '/theme',
+      'variables' => array(
+        'list' => NULL,
         'add_form' => NULL,
       ),
     ),

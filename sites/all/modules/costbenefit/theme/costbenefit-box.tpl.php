@@ -1,9 +1,9 @@
-<div class="cb-box">
+<div class="cb-box well">
   
   <div>
     <h4><?php print _costbenefit_get_box_label($vars['box'], TRUE, drupal_get_title()) ?>
     <span class="badge"><?php print count($vars['items']); ?></span>
-    <button class="btn btn-tertiary" data-toggle="modal" data-target=".add-item-modal-<?php print $vars['box']; ?>">
+    <button class="btn btn-tertiary pull-right" data-toggle="modal" data-target=".add-item-modal-<?php print $vars['box']; ?>">
       <span class="glyphicon glyphicon-plus"></span>
     </button>
     </h4>

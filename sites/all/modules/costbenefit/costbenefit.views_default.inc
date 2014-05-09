@@ -29,27 +29,36 @@ function costbenefit_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['style_plugin'] = 'table';
-  /* Field: Cost-Benefit: Cost-benefit ID */
+  /* Relationship: Costbenefit: Uid */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'costbenefit';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['label'] = 'Author';
+  $handler->display->display_options['relationships']['uid']['required'] = TRUE;
+  /* Field: Costbenefit: Cb id */
   $handler->display->display_options['fields']['cb_id']['id'] = 'cb_id';
   $handler->display->display_options['fields']['cb_id']['table'] = 'costbenefit';
   $handler->display->display_options['fields']['cb_id']['field'] = 'cb_id';
+  $handler->display->display_options['fields']['cb_id']['label'] = 'Cost-benefit ID';
   $handler->display->display_options['fields']['cb_id']['exclude'] = TRUE;
   $handler->display->display_options['fields']['cb_id']['separator'] = '';
-  /* Field: Cost-Benefit: Label */
+  /* Field: Costbenefit: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'costbenefit';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Title';
   $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['path'] = 'cb/[cb_id]';
-  /* Field: Cost-Benefit: Updated */
+  /* Field: Costbenefit: Date updated */
   $handler->display->display_options['fields']['updated']['id'] = 'updated';
   $handler->display->display_options['fields']['updated']['table'] = 'costbenefit';
   $handler->display->display_options['fields']['updated']['field'] = 'updated';
-  /* Contextual filter: Cost-Benefit: Uid */
+  $handler->display->display_options['fields']['updated']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['updated']['custom_date_format'] = 'F j';
+  /* Contextual filter: User: Uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
-  $handler->display->display_options['arguments']['uid']['table'] = 'costbenefit';
+  $handler->display->display_options['arguments']['uid']['table'] = 'users';
   $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['relationship'] = 'uid';
   $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
   $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';

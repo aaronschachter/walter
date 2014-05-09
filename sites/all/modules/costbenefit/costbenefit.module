@@ -298,9 +298,9 @@ function costbenefit_views_data() {
  */
 function _costbenefit_get_box_label($box, $plural = TRUE, $title = NULL) {
   $type = _costbenefit_get_box_type($box, $plural);
-  $action = 'using';
+  $action = 'USING';
   if ($box > 2) {
-    $action = 'NOT using';
+    $action = 'NOT USING';
   }
   if ($title) {
     $title = ' ' . $title;

@@ -24,7 +24,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Edit</h4>
+        <h4 class="modal-title">Edit Costbenefit</h4>
       </div>
       <div class="modal-body">
         <p><?php print render($content['edit_form']); ?></p>

@@ -1,0 +1,20 @@
+<?php
+/**
+ * @file
+ * Code for the walter_user module.
+ */
+
+/**
+ * Implements hook_form_alter().
+ */
+function walter_user_form_alter(&$form, $form_state, $form_id) {
+  global $user;
+  $account = $user;
+  switch ($form_id) {
+    case 'user_login_block':
+    case 'user_login':
+      // Direct user to the front page (overrides Drupal default of /user).
+      $form_state['#redirect'] = 'home';
+    break;
+  }
+}

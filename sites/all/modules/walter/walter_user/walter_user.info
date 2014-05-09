@@ -1,0 +1,4 @@
+name = Walter User
+description = Custom user functionality.
+core = 7.x
+package = Walter

@@ -18,3 +18,11 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
     break;
   }
 }
+
+/**
+ * Implements hook_menu_alter().
+ */
+function walter_user_menu_alter(&$items) {
+  unset($items['user']);
+  unset($items['user/register']);
+}

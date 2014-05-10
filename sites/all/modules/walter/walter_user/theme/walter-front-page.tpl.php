@@ -37,7 +37,7 @@ continuing or discontinuing the behavior.<sup>1</sup></p>
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Sign In</h4>
+        <h4 class="modal-title">Sign in to your Walter account</h4>
       </div>
       <div class="modal-body">
         <p><?php print render($login_form); ?></p>

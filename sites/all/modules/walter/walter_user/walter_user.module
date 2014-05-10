@@ -48,6 +48,11 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       $form['links']['#markup'] = l('Forgot password?', 'user/password');
       // Use email as the username field title.
       $form['name']['#title'] = t('Your email');
+      // Wrap actions in the modal-footer.
+      $form['actions']['submit']['#prefix'] = '<div class="modal-footer">';
+      $form['actions']['submit']['#suffix'] = '</div>';
+      $form['actions']['submit']['#value'] = t('Sign in');
+      $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
       break;
     case 'user_register_form':
       $form['account']['mail']['#title'] = t('Your email');

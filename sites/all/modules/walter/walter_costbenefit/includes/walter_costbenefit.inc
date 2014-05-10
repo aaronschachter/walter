@@ -32,7 +32,7 @@ class CostbenefitEntity extends Entity {
       $item_entity = costbenefit_item_load($record->cb_item_id);
       $items[$delta] = $record;
       $items[$delta]->type_desc = $record->type ? 'Long term' : 'Short term';
-      $items[$delta]->form = drupal_get_form('costbenefit_item_edit_form', $item_entity);
+      $items[$delta]->form = drupal_get_form('walter_costbenefit_item_edit_form', $item_entity);
     }
     return $items;
   }
@@ -49,10 +49,10 @@ class CostbenefitEntityController extends EntityAPIController {
    * Adds Costbenefit properties and items into the content array.
    */
   public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {
-    module_load_include('inc', 'costbenefit', 'costbenefit.forms');
+    module_load_include('inc', 'walter_costbenefit', 'walter_costbenefit.forms');
     $build = parent::buildContent($entity, $view_mode, $langcode, $content);
     $build['title'] = $entity->title;
-    $build['edit_form'] = drupal_get_form('costbenefit_form', $entity);
+    $build['edit_form'] = drupal_get_form('walter_costbenefit_form', $entity);
     $boxes = array();
     // Loop through the boxes.
     for ($i = 1; $i <= 4; $i++) {
@@ -63,7 +63,7 @@ class CostbenefitEntityController extends EntityAPIController {
         'items' => $entity->getBoxItems($i),
         'link' => $link,
       );
-      $add_form = drupal_get_form('costbenefit_item_add_form_' . $i, $entity, $i);
+      $add_form = drupal_get_form('walter_costbenefit_item_add_form_' . $i, $entity, $i);
       $build['boxes'][$i] = array(
         '#markup' => theme('costbenefit_box', array(
           'vars' => $vars,

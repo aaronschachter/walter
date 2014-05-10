@@ -1,9 +1,10 @@
-name = costbenefit
+name = Walter Costbenefit
 description = Provides Cost-Benefit entity functionality.
 core = 7.x
 package = Walter
+dependencies[] = entity
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[views_view][] = cb_list
-files[] = includes/costbenefit.inc
+files[] = includes/walter_costbenefit.inc

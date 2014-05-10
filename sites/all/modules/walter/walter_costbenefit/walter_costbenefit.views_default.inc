@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * costbenefit.views_default.inc
+ * walter_costbenefit.views_default.inc
  */
 
 /**
  * Implements hook_views_default_views().
  */
-function costbenefit_views_default_views() {
+function walter_costbenefit_views_default_views() {
   $export = array();
 
   $view = new view();

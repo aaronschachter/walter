@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Installation and schema hooks for costbenefit.module.
+ * Installation and schema hooks for walter_costbenefit.module.
  */
 
 /**
  * Implements hook_schema().
  */
-function costbenefit_schema() {
+function walter_costbenefit_schema() {
   $schema = array();
   $schema['costbenefit'] = array(
     'description' => 'Table of costbenefit entities.',

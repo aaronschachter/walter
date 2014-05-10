@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-6">
+  <div class="col-md-6">
     <header role="banner" id="page-header">
       <p class="lead">Walter is an app for building motivation to change.</p>
     </header>
@@ -14,7 +14,7 @@
     <p>The Cost-Benefit Analysis is a tool used in <a href="http://smartrecovery.org" target="_blank">SMART Recovery</a>.  It is a method for exploring the short-term vs. long-term benefits associated with 
 continuing or discontinuing the behavior.<sup>1</sup></p>
   </div>
-  <div class="col-xs-6">
+  <div class="col-md-6">
     <div class="">
       <h3>Sound useful? <small>Try it out, it's free.</small></h3>
       <?php print render($register_form); ?>

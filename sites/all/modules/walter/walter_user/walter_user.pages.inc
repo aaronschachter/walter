@@ -8,8 +8,11 @@
  * Page callback for /front.
  */
 function walter_user_front_page() {
-  if (!user_is_logged_in()) { 
-    return theme('walter_front_page'); 
+  if (!user_is_logged_in()) {
+    return theme('walter_front_page', array(
+      'login_form' => drupal_get_form('user_login_block'),
+      'register_form' => drupal_get_form('user_register_form'),
+    )); 
   }
 
   $list = views_embed_view('cb_list', 'default');

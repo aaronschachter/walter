@@ -25,6 +25,10 @@ function walter_user_theme($existing, $type, $theme, $path) {
     'walter_front_page' => array(
       'template' => 'walter-front-page',
       'path' => drupal_get_path('module', 'walter_user') . '/theme',
+      'variables' => array(
+        'register_form' => NULL,
+        'login_form' => NULL,
+      ),
     ),
   );
 }

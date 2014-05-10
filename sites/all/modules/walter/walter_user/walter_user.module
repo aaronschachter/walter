@@ -60,6 +60,8 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       unset($form['account']['name']);
       $form['actions']['submit']['#value'] = t('Get started');
       $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
+      $form['actions']['submit']['#prefix'] = '<p class="text-right">';
+      $form['actions']['submit']['#suffix'] = '</p>';
       $form['costbenefit_title'] = array(
         '#type' => 'textfield',
         '#title' => t("The substance or behavior to consider is:"),

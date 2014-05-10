@@ -15,7 +15,21 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
     case 'user_login':
       // Direct user to the front page (overrides Drupal default of /user).
       $form_state['#redirect'] = 'home';
-    break;
+      // Overwrite links to get rid of default markup.
+      $form['links']['#markup'] = l('Forgot password?', 'user/password');
+      break;
+    case 'user_register_form':
+      $form['account']['mail']['#title'] = t('Your email');
+      unset($form['account']['mail']['#description']);
+      unset($form['account']['name']);
+      $form['actions']['submit']['#value'] = t('Get started');
+      $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
+      $form['costbenefit_title'] = array(
+        '#type' => 'textfield',
+        '#title' => t("The substance or behavior to consider is:"),
+        '#required' => TRUE,
+      );
+      break;
   }
 }
 

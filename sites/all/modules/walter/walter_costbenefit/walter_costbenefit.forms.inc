@@ -8,7 +8,7 @@
 /**
  * Form constructor for Costbenefit entity add/edit.
  */
-function costbenefit_form($form, &$form_state, $entity = NULL) {
+function walter_costbenefit_form($form, &$form_state, $entity = NULL) {
   $label = t('Create');
   if ($entity) {
     $form['cb_id'] = array(
@@ -31,7 +31,7 @@ function costbenefit_form($form, &$form_state, $entity = NULL) {
 /**
  * Submit callback for costbenefit_form().
  */
-function costbenefit_form_submit($form, &$form_state) {
+function walter_costbenefit_form_submit($form, &$form_state) {
   // If a cb_id exists, load existing entity.
   if (isset($form_state['values']['cb_id'])) {
     $entity = costbenefit_load($form_state['values']['cb_id']);
@@ -53,7 +53,7 @@ function costbenefit_form_submit($form, &$form_state) {
  * @param int $box
  *   The box number the cb-item belongs to.
  */
-function costbenefit_item_add_form($form, &$form_state, $cb, $box) {
+function walter_costbenefit_item_add_form($form, &$form_state, $cb, $box) {
   $label = 'A ' . _costbenefit_get_box_label($box, FALSE, $cb->title) . ' is:';
   $form['cb_id'] = array(
     '#type' => 'hidden',
@@ -85,7 +85,7 @@ function costbenefit_item_add_form($form, &$form_state, $cb, $box) {
 /**
  * Submit callback for costbenefit_item_add_form().
  */
-function costbenefit_item_add_form_submit($form, &$form_state) {
+function walter_costbenefit_item_add_form_submit($form, &$form_state) {
   global $user;
   $entity = entity_create('costbenefit_item', array());
   $entity->cb_id = $form_state['values']['cb_id'];
@@ -103,7 +103,7 @@ function costbenefit_item_add_form_submit($form, &$form_state) {
  * @param object $item
  *   The cost-benefit entity the cb-item belongs to.
  */
-function costbenefit_item_edit_form($form, &$form_state, $item) {
+function walter_costbenefit_item_edit_form($form, &$form_state, $item) {
   $form['cb_item_id'] = array(
     '#type' => 'hidden',
     // And this has to be default_value, not value to get the mutiple forms working.
@@ -131,9 +131,9 @@ function costbenefit_item_edit_form($form, &$form_state, $item) {
 }
 
 /**
- * Submit callback for costbenefit_item_add_form().
+ * Submit callback for costbenefit_item_edit_form().
  */
-function costbenefit_item_edit_form_submit($form, &$form_state) {
+function walter_costbenefit_item_edit_form_submit($form, &$form_state) {
   global $user;
   $cb_item_id = $form_state['values']['cb_item_id'];
   $entity = costbenefit_item_load($cb_item_id);
@@ -152,7 +152,7 @@ function costbenefit_item_edit_form_submit($form, &$form_state) {
  *
  * @ingroup forms
  */
-function costbenefit_item_delete_form($form, &$form_state, $entity) {
+function walter_costbenefit_item_delete_form($form, &$form_state, $entity) {
   $form['cb_item_id'] = array(
     '#type' => 'hidden',
     '#value' => $entity->cb_item_id,
@@ -182,9 +182,9 @@ function costbenefit_item_delete_form($form, &$form_state, $entity) {
 }
 
 /**
- * Submit callback for dosomething_reportback_delete_form().
+ * Submit callback for walter_costbenefit_item_delete_form().
  */
-function costbenefit_item_delete_form_submit($form, &$form_state) {
+function walter_costbenefit_item_delete_form_submit($form, &$form_state) {
   $cb_item_id = $form_state['values']['cb_item_id'];
   entity_delete('costbenefit_item', $cb_item_id);
   $form_state['redirect'] = 'cb/' . $form_state['values']['cb_id'];

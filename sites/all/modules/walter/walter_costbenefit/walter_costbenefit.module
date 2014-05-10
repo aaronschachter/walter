@@ -1,45 +1,45 @@
 <?php
 /**
  * @file
- * Code for the costbenefit feature.
+ * Code for the walter_costbenefit feature.
  */
 
-include_once 'costbenefit.features.inc';
-include_once 'costbenefit.forms.inc';
+include_once 'walter_costbenefit.features.inc';
+include_once 'walter_costbenefit.forms.inc';
 
 /**
  * Implements hook_menu().
  */
-function costbenefit_menu() {
+function walter_costbenefit_menu() {
   $items = array();
   $items['home'] = array(
-    'page callback' => 'costbenefit_home_page',
+    'page callback' => 'walter_costbenefit_home_page',
     'access callback' => TRUE,
-    'file' => 'costbenefit.pages.inc',
+    'file' => 'walter_costbenefit.pages.inc',
   );
   $items['cb/%costbenefit'] = array(
-    'title callback' => 'costbenefit_get_title',
+    'title callback' => 'walter_costbenefit_get_title',
     'title arguments' => array('view', 1),
-    'page callback' => 'costbenefit_view_entity',
+    'page callback' => 'walter_costbenefit_view_entity',
     'page arguments' => array(1),
     'access callback' => 'costbenefit_access',
     'access arguments' => array(1),
   );
   $items['cb/%costbenefit/edit'] = array(
-    'title callback' => 'costbenefit_get_title',
+    'title callback' => 'walter_costbenefit_get_title',
     'title arguments' => array('edit', 1),
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('costbenefit_form', 1),
+    'page arguments' => array('walter_costbenefit_form', 1),
     'access callback' => 'costbenefit_access',
     'access arguments' => array(1),
-    'file' => 'costbenefit.forms.inc',
+    'file' => 'walter_costbenefit.forms.inc',
   );
   $items['cb/add'] = array(
     'title' => 'New Cost-Benefit Matrix',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_form', NULL),
     'access callback' => 'user_is_logged_in',
-    'file' => 'costbenefit.forms.inc',
+    'file' => 'walter_costbenefit.forms.inc',
   );
   // Pass box number as parameter to the add cb_matrix_item page.
   $items['cb/%costbenefit/add/%'] = array(
@@ -49,17 +49,15 @@ function costbenefit_menu() {
     'page arguments' => array('costbenefit_item_add_form', 1, 3),
     'access callback' => 'costbenefit_access',
     'access arguments' => array(1),
-    'file' => 'costbenefit.forms.inc',
+    'file' => 'walter_costbenefit.forms.inc',
   );
   $items['cb/%costbenefit/%costbenefit_item'] = array(
-    // 'title callback' => '_costbenefit_get_box_type',
-    // 'title arguments' => array(2),
     'title' => 'Item',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_item_edit_form', 2),
     'access callback' => 'costbenefit_access',
     'access arguments' => array(1),
-    'file' => 'costbenefit.forms.inc',
+    'file' => 'walter_costbenefit.forms.inc',
   );
   $items['cb/%costbenefit/%costbenefit_item/delete'] = array(
     'title' => 'Delete',
@@ -67,7 +65,7 @@ function costbenefit_menu() {
     'page arguments' => array('costbenefit_item_delete_form', 2),
     'access callback' => 'costbenefit_access',
     'access arguments' => array(1),
-    'file' => 'costbenefit.forms.inc',
+    'file' => 'walter_costbenefit.forms.inc',
   );
   return $items;
 }
@@ -75,7 +73,7 @@ function costbenefit_menu() {
 /**
  * Implements hook_entity_info().
  */
-function costbenefit_entity_info() {
+function walter_costbenefit_entity_info() {
   $info = array();
   $info['costbenefit'] = array(
     'label' => t('Cost-Benefit'),
@@ -87,7 +85,7 @@ function costbenefit_entity_info() {
     'entity class' => 'CostbenefitEntity',
     'uri callback' => 'entity_class_uri',
     'controller class' => 'CostbenefitEntityController',
-    'module' => 'costbenefit',
+    'module' => 'walter_costbenefit',
   );
   $info['costbenefit_item'] = array(
     'label' => t('Cost-Benefit Item'),
@@ -99,7 +97,7 @@ function costbenefit_entity_info() {
     'entity class' => 'CostbenefitItemEntity',
     'uri callback' => 'entity_class_uri',
     'controller class' => 'CostbenefitItemEntityController',
-    'module' => 'costbenefit',
+    'module' => 'walter_costbenefit',
   );
   return $info;
 }
@@ -123,11 +121,11 @@ function costbenefit_item_load($cb_item_id) {
 /**
  * Implements hook_theme().
  */
-function costbenefit_theme($existing, $type, $theme, $path) {
+function walter_costbenefit_theme($existing, $type, $theme, $path) {
   return array(
     'costbenefit_box' => array(
       'template' => 'costbenefit-box',
-      'path' => drupal_get_path('module', 'costbenefit') . '/theme',
+      'path' => drupal_get_path('module', 'walter_costbenefit') . '/theme',
       'variables' => array(
         'vars' => NULL,
         'add_form' => NULL,
@@ -135,7 +133,7 @@ function costbenefit_theme($existing, $type, $theme, $path) {
     ),
     'costbenefit_list' => array(
       'template' => 'costbenefit-list',
-      'path' => drupal_get_path('module', 'costbenefit') . '/theme',
+      'path' => drupal_get_path('module', 'walter_costbenefit') . '/theme',
       'variables' => array(
         'list' => NULL,
         'add_form' => NULL,
@@ -143,7 +141,7 @@ function costbenefit_theme($existing, $type, $theme, $path) {
     ),
     'costbenefit_front' => array(
       'template' => 'costbenefit-front',
-      'path' => drupal_get_path('module', 'costbenefit') . '/theme',
+      'path' => drupal_get_path('module', 'walter_costbenefit') . '/theme',
     ),
   );
 }
@@ -153,7 +151,7 @@ function costbenefit_theme($existing, $type, $theme, $path) {
  *
  * @see template_preprocess_entity in Entity API module.
  */
-function costbenefit_preprocess_entity(&$variables) {
+function walter_costbenefit_preprocess_entity(&$variables) {
   if ($variables['elements']['#entity_type'] == 'costbenefit' && $variables['view_mode'] == 'full') {
     // Enables costbenefit.tpl.php naming suggestion.
     $variables['theme_hook_suggestions'][] = 'costbenefit';
@@ -164,14 +162,14 @@ function costbenefit_preprocess_entity(&$variables) {
 /**
  * Page callback for /costbenefit/ID.
  */
-function costbenefit_view_entity($entity) {
+function walter_costbenefit_view_entity($entity) {
   return entity_view('costbenefit', array($entity->cb_id => $entity), 'full');
 }
 
 /**
  * Title callback for /costbenefit/ID.
  */
-function costbenefit_get_title($op, $entity) {
+function walter_costbenefit_get_title($op, $entity) {
   if ($op == 'view') {
     return $entity->title;
   }
@@ -186,22 +184,21 @@ function costbenefit_access($entity) {
   if ($user->uid == 1) {
     return TRUE;
   }
-  dsm($entity->uid);
-  //print '</pre>' . print_r($entity) . '</pre>';
-  //@todo: Fix bug: Notice: Trying to get property of non-object.
   return $user->uid == $entity->uid;
 }
 
 /**
  * Implements hook_forms().
  */
-function costbenefit_forms($form_id, $args) {
+function walter_costbenefit_forms($form_id, $args) {
   $forms = array();
-  if (substr($form_id, 0, 26) == 'costbenefit_item_add_form_') {
-    $forms[$form_id] = array('callback' => 'costbenefit_item_add_form');
+  $item_add_form_id = 'walter_costbenefit_item_add_form';
+  $item_edit_form_id = 'walter_costbenefit_item_edit_form';
+  if (strpos($item_add_form_id . '_', $form_id) === FALSE) {
+    $forms[$form_id] = array('callback' => $item_add_form_id);
   }
-  elseif (substr($form_id, 0, 27) == 'costbenefit_item_edit_form_') {
-    $forms[$form_id] = array('callback' => 'costbenefit_item_edit_form');
+  elseif (strpos($item_edit_form_id . '_', $form_id) === FALSE) {
+    $forms[$form_id] = array('callback' => $item_edit_form_id);
   }
   return $forms;
 }
@@ -209,7 +206,7 @@ function costbenefit_forms($form_id, $args) {
 /**
  * Implements hook_views_data().
  */
-function costbenefit_views_data() {
+function walter_costbenefit_views_data() {
   // Define costbenefit table.
   $data['costbenefit']['table']['group'] = t('Costbenefit');
   $data['costbenefit']['table']['base'] = array(

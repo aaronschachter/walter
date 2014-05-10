@@ -46,6 +46,8 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       $form_state['#redirect'] = 'home';
       // Overwrite links to get rid of default markup.
       $form['links']['#markup'] = l('Forgot password?', 'user/password');
+      // Use email as the username field title.
+      $form['name']['#title'] = t('Your email');
       break;
     case 'user_register_form':
       $form['account']['mail']['#title'] = t('Your email');

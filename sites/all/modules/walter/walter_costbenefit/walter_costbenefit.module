@@ -12,11 +12,6 @@ include_once 'walter_costbenefit.forms.inc';
  */
 function walter_costbenefit_menu() {
   $items = array();
-  $items['home'] = array(
-    'page callback' => 'walter_costbenefit_home_page',
-    'access callback' => TRUE,
-    'file' => 'walter_costbenefit.pages.inc',
-  );
   $items['cb/%costbenefit'] = array(
     'title callback' => 'walter_costbenefit_get_title',
     'title arguments' => array('view', 1),
@@ -138,10 +133,6 @@ function walter_costbenefit_theme($existing, $type, $theme, $path) {
         'list' => NULL,
         'add_form' => NULL,
       ),
-    ),
-    'costbenefit_front' => array(
-      'template' => 'costbenefit-front',
-      'path' => drupal_get_path('module', 'walter_costbenefit') . '/theme',
     ),
   );
 }

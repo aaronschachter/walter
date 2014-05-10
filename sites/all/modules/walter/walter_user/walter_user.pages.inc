@@ -1,16 +1,15 @@
 <?php
-
 /**
  * @file
- * Provides page callbacks for the walter_costbenefit module.
+ * Provides page callbacks for the walter_user module.
  */
 
 /**
- * Page callback for /home.
+ * Page callback for /front.
  */
-function walter_costbenefit_home_page() {
+function walter_user_front_page() {
   if (!user_is_logged_in()) { 
-    return theme('costbenefit_front'); 
+    return theme('walter_front_page'); 
   }
 
   $list = views_embed_view('cb_list', 'default');

@@ -5,6 +5,31 @@
  */
 
 /**
+ * Implements hook_menu().
+ */
+function walter_user_menu() {
+  $items = array();
+  $items['front'] = array(
+    'page callback' => 'walter_user_front_page',
+    'access callback' => TRUE,
+    'file' => 'walter_user.pages.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function walter_user_theme($existing, $type, $theme, $path) {
+  return array(
+    'walter_front_page' => array(
+      'template' => 'walter-front-page',
+      'path' => drupal_get_path('module', 'walter_user') . '/theme',
+    ),
+  );
+}
+
+/**
  * Implements hook_form_alter().
  */
 function walter_user_form_alter(&$form, $form_state, $form_id) {

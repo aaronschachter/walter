@@ -68,6 +68,7 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
         '#title' => t("The substance or behavior to consider is:"),
         '#required' => TRUE,
       );
+      $form['#submit'][] = 'walter_user_new_user';
       break;
   }
 }
@@ -78,4 +79,18 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
 function walter_user_menu_alter(&$items) {
   unset($items['user']);
   unset($items['user/register']);
+}
+
+/**
+ * Additional callback for user register form.
+ *
+ * Creates a costbenefit based on the value entered on the form.
+ */
+function walter_user_new_user($form, &$form_state) {
+  global $user;
+  $title = $form_state['values']['costbenefit_title'];
+  $entity = entity_create('costbenefit', array(
+    'title' => $title,
+  ));
+  $entity->save();
 }

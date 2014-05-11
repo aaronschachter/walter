@@ -39,6 +39,8 @@ function walter_user_theme($existing, $type, $theme, $path) {
 function walter_user_form_alter(&$form, $form_state, $form_id) {
   global $user;
   $account = $user;
+  // Globally change E-mail to Email.
+  $form['account']['mail']['#title'] = t('Email');
   switch ($form_id) {
     case 'user_login_block':
     case 'user_login':
@@ -53,6 +55,10 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
       break;
     case 'user_register_form':
+      unset($form['account']['mail']['#description']);
+      // Removes password-confirmation field.
+      $form['account']['pass']['#type'] = 'password';
+      $form['account']['pass']['#title'] = 'Password';
       $form['actions']['submit']['#value'] = t('Get started');
       $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
       $form['actions']['submit']['#prefix'] = '<p class="text-right">';

@@ -46,8 +46,6 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       $form_state['#redirect'] = 'home';
       // Overwrite links to get rid of default markup.
       $form['links']['#markup'] = l('Forgot password?', 'user/password');
-      // Use email as the username field title.
-      $form['name']['#title'] = t('Your email');
       // Wrap actions in the modal-footer.
       $form['actions']['submit']['#prefix'] = '<div class="modal-footer">';
       $form['actions']['submit']['#suffix'] = '</div>';
@@ -55,9 +53,6 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
       break;
     case 'user_register_form':
-      $form['account']['mail']['#title'] = t('Your email');
-      unset($form['account']['mail']['#description']);
-      unset($form['account']['name']);
       $form['actions']['submit']['#value'] = t('Get started');
       $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
       $form['actions']['submit']['#prefix'] = '<p class="text-right">';

@@ -43,6 +43,7 @@ function walter_costbenefit_form_submit($form, &$form_state) {
   $entity->title = $form_state['values']['title'];
   $entity->save();
   $form_state['redirect'] = 'cb/' . $entity->cb_id;
+  drupal_set_message(t('Updated ') . '<em>' . $entity->title . '</em>.');
 }
 
 /**

@@ -10,3 +10,7 @@ function bootstrap_float_preprocess_page(&$variables) {
     $variables['show_title'] = FALSE;
   }
 }
+
+function bootstrap_float_form_required_marker($variables) {
+  return;
+}

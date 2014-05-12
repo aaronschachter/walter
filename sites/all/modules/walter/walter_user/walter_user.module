@@ -93,4 +93,6 @@ function walter_user_new_user($form, &$form_state) {
     'title' => $title,
   ));
   $entity->save();
+  // Redirect to the newly created costbenefit.
+  drupal_goto('cb/' . $entity->cb_id);
 }

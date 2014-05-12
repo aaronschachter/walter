@@ -1,5 +1,4 @@
 <div>
-WTF
   <button class="btn btn-tertiary pull-right" data-toggle="modal" data-target=".add-cb-modal">
     <span class="glyphicon glyphicon-plus"></span>
   </button>

@@ -29,14 +29,31 @@
                         },
                     }
                 },
-                email: {
+                mail: {
                     validators: {
                         notEmpty: {
-                            message: 'The email is required and cannot be empty'
+                            message: 'Please enter your email address.'
                         },
                         emailAddress: {
-                            message: 'The input is not a valid email address'
+                            message: 'Invalid email address.'
                         }
+                    }
+                },
+                name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter your email address.'
+                        },
+                        emailAddress: {
+                            message: 'Invalid email address.'
+                        }
+                    }
+                },
+                pass: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter your password.'
+                        },
                     }
                 }
             }

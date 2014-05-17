@@ -108,7 +108,7 @@ global $user;
       </div>
     <?php else: ?>
       <div class="pull-right login-block">
-      <?php print render(drupal_get_form('user_login_block')); ?>
+      <?php print render($login_form); ?>
       </div>
     <?php endif; ?>
 

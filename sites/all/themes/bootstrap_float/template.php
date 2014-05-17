@@ -14,6 +14,10 @@ function bootstrap_float_preprocess_page(&$variables) {
   if (arg(0) == 'cb') {
     $variables['show_title'] = FALSE;
   }
+  // Add login form variable.
+  if (!user_is_logged_in()) {
+     $variables['login_form'] = drupal_get_form('user_login_block');
+  }
   // Adds Bootstrap Validator files.
   drupal_add_css(drupal_get_path('theme', 'bootstrap_float') . '/validator/css/bootstrapValidator.min.css');
   drupal_add_js(drupal_get_path('theme', 'bootstrap_float') . '/validator/js/bootstrapValidator.min.js');

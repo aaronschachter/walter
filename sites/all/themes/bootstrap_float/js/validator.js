@@ -22,6 +22,13 @@
                         },
                     }
                 },
+                type: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Select a type.'
+                        },
+                    }
+                },
                 email: {
                     validators: {
                         notEmpty: {

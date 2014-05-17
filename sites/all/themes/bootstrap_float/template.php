@@ -38,6 +38,7 @@ function bootstrap_float_form_alter(&$form, $form_state, $form_id) {
   switch ($form_id) {
     case 'user_login_block':
       $form['#attributes']['class'][] = 'form-inline';
+      $form['pass']['#description'] = l("Forgot password?", '/user/password');
       break;
   }
 }

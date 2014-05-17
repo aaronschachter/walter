@@ -50,14 +50,10 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       break;
     case 'user_login_block':
     case 'user_login':
-      // Direct user to the front page (overrides Drupal default of /user).
+      // Direct user to the front page (overrides Drupal default of /user)
       $form_state['#redirect'] = 'front';
       // Overwrite links to get rid of default markup.
       unset($form['links']);
-      $form['pass']['#description'] = l('Forgot password?', 'user/password');
-      // Wrap actions in the modal-footer.
-      // $form['actions']['submit']['#prefix'] = '<div class="modal-footer">';
-      // $form['actions']['submit']['#suffix'] = '</div>';
       $form['actions']['submit']['#value'] = t('Sign in');
       $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
       break;

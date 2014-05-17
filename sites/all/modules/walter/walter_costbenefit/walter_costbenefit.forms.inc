@@ -76,9 +76,8 @@ function walter_costbenefit_item_add_form($form, &$form_state, $cb, $box) {
   );
   $form['body']['type'] = array(
     '#type' => 'radios',
-    '#required' => TRUE,
-    '#title' => 'Select a type:',
     '#options' => _costbenefit_get_type_options(),
+    '#default_value' => 0,
   );
   $form['submit'] = _get_costbenefit_form_submit_element('Add');
   return $form;

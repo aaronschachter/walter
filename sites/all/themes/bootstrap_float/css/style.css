@@ -19,10 +19,17 @@ a.edit-cb_item-link {
   cursor: pointer;
   text-decoration: none;
 }
+.cb-box.well {
+  background-image: none;
 
-.cb-box ul li {
+}
+.cb-box .box-item {
   border-bottom: 1px solid #ddd;
-  padding: 10px 0;
+  padding: 10px 6px;
+}
+.box-item:hover {
+  background-color: white;
+  cursor: pointer;
 }
 
 .footer {

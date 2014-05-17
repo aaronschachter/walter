@@ -1,5 +1,5 @@
 <div class="cb-box well">
-  
+
   <div>
     <h4><?php print _costbenefit_get_box_label($vars['box'], TRUE, drupal_get_title()) ?>
     <span class="badge"><?php print count($vars['items']); ?></span>
@@ -8,14 +8,14 @@
     </button>
     </h4>
   </div>
-  <ul>
+
   <?php foreach ($vars['items'] as $item): ?>
 
-      <li>
-      <a class="edit-cb_item-link" data-toggle="modal" data-target=".edit-item-modal-<?php print $item->cb_item_id; ?>">
+     <div class="box-item">
+      <div class="edit-cb_item-link" data-toggle="modal" data-target=".edit-item-modal-<?php print $item->cb_item_id; ?>">
         <?php print $item->title; ?>
-        <span class="pull-right"><?php print $item->type_desc; ?></span>
-      </a>
+        <p class="legal text-right"><?php print $item->type_desc; ?></p>
+      </div>
       <!-- Edit item modal -->
       <div class="modal fade edit-item-modal-<?php print $item->cb_item_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -30,9 +30,9 @@
           </div>
         </div>
       </div>
-    </li>
+    </div>
   <?php endforeach; ?>
-  </ul>
+
 
 
   <!-- Add item modal -->

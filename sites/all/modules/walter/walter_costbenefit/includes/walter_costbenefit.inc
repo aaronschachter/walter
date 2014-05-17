@@ -116,9 +116,16 @@ class CostbenefitItemEntityController extends EntityAPIController {
    * Sets parent costbenefit updated property.
    */
   public function save($entity, DatabaseTransaction $transaction = NULL) {
-    parent::save($entity, $transaction);
+    global $user;
     // Load the parent costbenefit.
     $costbenefit = costbenefit_load($entity->cb_id);
+    // If current user is not the entity author:
+    if ($costbenefit->uid != $user->uid) {
+      // HTML injection attack.  Set error message and don't save.
+      drupal_set_message(t('Sorry, an error as occurred.'), 'error');
+      return FALSE;
+    }
+    parent::save($entity, $transaction);
     // Save to update the timestamp.
     $costbenefit->save();
   }

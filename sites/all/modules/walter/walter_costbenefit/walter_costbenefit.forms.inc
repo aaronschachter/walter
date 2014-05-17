@@ -41,9 +41,10 @@ function walter_costbenefit_form_submit($form, &$form_state) {
     $entity = entity_create('costbenefit', array());
   }
   $entity->title = $form_state['values']['title'];
-  $entity->save();
-  $form_state['redirect'] = 'cb/' . $entity->cb_id;
-  drupal_set_message(t('Updated ') . '<em>' . $entity->title . '</em>.');
+  if ($entity->save()) {
+    $form_state['redirect'] = 'cb/' . $entity->cb_id;
+    drupal_set_message(t('Updated ') . '<em>' . $entity->title . '</em>.');
+  }
 }
 
 /**
@@ -141,9 +142,10 @@ function walter_costbenefit_item_edit_form_submit($form, &$form_state) {
   $entity = costbenefit_item_load($cb_item_id);
   $entity->title = $form_state['values']['title'];
   $entity->type = $form_state['values']['type'];
-  $entity->save();
-  $form_state['redirect'] = 'cb/' . $entity->cb_id;
-  drupal_set_message("Edited <em>" . $entity->title . "</em>.");
+  if ($entity->save()) {
+    $form_state['redirect'] = 'cb/' . $entity->cb_id;
+    drupal_set_message("Edited <em>" . $entity->title . "</em>.");
+  }
 }
 
 /**

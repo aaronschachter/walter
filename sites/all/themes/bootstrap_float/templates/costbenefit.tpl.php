@@ -1,8 +1,8 @@
-<h1 class="page-header"><?php print $title; ?>
-<button class="btn btn-tertiary pull-right" data-toggle="modal" data-target=".edit-title-modal">
-   <span class="glyphicon glyphicon-pencil"></span>
-</button>
-</h1>
+
+<span data-toggle="modal" data-target=".edit-title-modal">
+   <h1 class="page-header pointer"><?php print $title; ?></h1>
+</span>
+
 
 
 <div class="row">

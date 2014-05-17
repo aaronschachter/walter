@@ -1,11 +1,17 @@
+h1.pointer {
+  cursor: pointer;
+}
+
 a.edit-cb_item-link {
   cursor: pointer;
   text-decoration: none;
 }
+
 .cb-box ul li {
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
 }
+
 .footer {
   margin-top: 20px;
   border-top: 1px solid #ccc;

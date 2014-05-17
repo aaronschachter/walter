@@ -61,10 +61,11 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
       break;
     case 'user_register_form':
-      $email_help = t("Email will never be publicly displayed.");
+      $form['account']['mail']['#description'] = $email_help;;
       // Removes password-confirmation field.
       $form['account']['pass']['#type'] = 'password';
       $form['account']['pass']['#title'] = 'Password';
+      $form['account']['pass']['#description'] = 'Create a password.';
       $form['actions']['submit']['#value'] = t('Get started');
       $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
       $form['actions']['submit']['#prefix'] = '<p class="text-right">';

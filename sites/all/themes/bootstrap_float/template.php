@@ -31,7 +31,7 @@ function bootstrap_float_form_required_marker($variables) {
  * Implements hook_form_alter().
  */
 function bootstrap_float_form_alter(&$form, $form_state, $form_id) {
-  if ($form_id == 'walter_costbenefit_item_edit_form') {
+  if (substr($form_id,0, 6) == 'walter') {
     $form['#attributes']['class'][] = 'bv-form';
     bootstrap_float_add_bootstrap_validator_wrapper($form, 'title');
   }

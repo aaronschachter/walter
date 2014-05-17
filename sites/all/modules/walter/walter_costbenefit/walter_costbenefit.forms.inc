@@ -76,8 +76,8 @@ function walter_costbenefit_item_add_form($form, &$form_state, $cb, $box) {
   );
   $form['body']['type'] = array(
     '#type' => 'radios',
-    '#required' => TRUE,
     '#options' => _costbenefit_get_type_options(),
+    '#default_value' => 0,
   );
   $form['submit'] = _get_costbenefit_form_submit_element('Add');
   return $form;
@@ -94,6 +94,7 @@ function walter_costbenefit_item_add_form_submit($form, &$form_state) {
   $entity->title = $form_state['values']['title'];
   $entity->type = $form_state['values']['type'];
   $entity->save();
+  drupal_set_message('Added <em>' .  $entity->title . '</em>.');
   $form_state['redirect'] = 'cb/' . $entity->cb_id;
 }
 
@@ -142,7 +143,7 @@ function walter_costbenefit_item_edit_form_submit($form, &$form_state) {
   $entity->type = $form_state['values']['type'];
   $entity->save();
   $form_state['redirect'] = 'cb/' . $entity->cb_id;
-  drupal_set_message("Item <em>" . $entity->title . "</em> has been updated.");
+  drupal_set_message("Edited <em>" . $entity->title . "</em>.");
 }
 
 /**

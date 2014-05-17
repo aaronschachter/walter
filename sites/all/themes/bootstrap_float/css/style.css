@@ -1,7 +1,11 @@
 h1.pointer {
   cursor: pointer;
 }
-
+.login-block label {
+  padding: 10px;
+  font-size: 0.8em;
+  display: block;
+}
 a.edit-cb_item-link {
   cursor: pointer;
   text-decoration: none;

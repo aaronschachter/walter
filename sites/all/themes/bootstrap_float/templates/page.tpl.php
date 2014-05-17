@@ -96,6 +96,7 @@ global $user;
       </button>
     </div>
 
+
     <?php if (user_is_logged_in()): ?>
       <div class="navbar-collapse collapse pull-right">
         <nav role="navigation">
@@ -105,7 +106,12 @@ global $user;
           </ul>
         </nav>
       </div>
+    <?php else: ?>
+      <div class="pull-right login-block">
+      <?php print render(drupal_get_form('user_login_block')); ?>
+      </div>
     <?php endif; ?>
+
   </div>
 </header>
 

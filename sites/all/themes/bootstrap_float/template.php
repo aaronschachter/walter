@@ -37,8 +37,7 @@ function bootstrap_float_form_alter(&$form, $form_state, $form_id) {
   }
   switch ($form_id) {
     case 'user_login_block':
-    case 'user_login':
-      $form['#attributes']['class'][] = 'bv-form';
+      $form['#attributes']['class'][] = 'form-inline';
       break;
   }
 }

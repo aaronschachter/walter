@@ -5,7 +5,7 @@
 
 <div class="row">
   <div class="col-md-6">
-    <p class="lead">List short-term and long-term benefits or continuing or discontinuing it.</li>
+    <p class="lead">List short-term and long-term benefits or continuing of discontinuing it.</li>
     <p>The lists together make up a <strong>Cost Benefit Analysis</strong>, a tool used in <a href="http://smartrecovery.org" target="_blank">SMART Recovery</a>.
     <p>Sign up for <strong>Walter</strong> to create and maintain your own private Cost Benefit Analysis.  Oh, and it's free!</p>
   </div>

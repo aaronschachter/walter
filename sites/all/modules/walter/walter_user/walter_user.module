@@ -41,7 +41,13 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
   $account = $user;
   // Globally change E-mail to Email.
   $form['account']['mail']['#title'] = t('Email');
+  $email_help = t("Email will never be publicly displayed.");
   switch ($form_id) {
+    case 'user_profile_form':
+      drupal_set_title(t("Settings"));
+      $form['account']['mail']['#description'] = $email_help;
+      unset($form['timezone']);
+      break;
     case 'user_login_block':
     case 'user_login':
       // Direct user to the front page (overrides Drupal default of /user).
@@ -55,7 +61,7 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
       break;
     case 'user_register_form':
-      unset($form['account']['mail']['#description']);
+      $email_help = t("Email will never be publicly displayed.");
       // Removes password-confirmation field.
       $form['account']['pass']['#type'] = 'password';
       $form['account']['pass']['#title'] = 'Password';

@@ -16,7 +16,7 @@ function bootstrap_float_preprocess_page(&$variables) {
   }
   // Add login form variable.
   if (!user_is_logged_in()) {
-     $variables['login_form'] = drupal_get_form('user_login_block');
+    $variables['login_form'] = drupal_get_form('user_login_block');
   }
   // Adds Bootstrap Validator files.
   drupal_add_css(drupal_get_path('theme', 'bootstrap_float') . '/validator/css/bootstrapValidator.min.css');
@@ -42,7 +42,10 @@ function bootstrap_float_form_alter(&$form, $form_state, $form_id) {
   switch ($form_id) {
     case 'user_login_block':
       $form['#attributes']['class'][] = 'form-inline';
-      $form['pass']['#description'] = l("Forgot password?", '/user/password');
+      $form['pass']['#description'] =  l("Forgot password?", 'user/password');
+      break;
+    case 'user_pass':
+      drupal_set_title("Password reset");
       break;
   }
 }

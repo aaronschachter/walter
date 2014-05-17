@@ -28,13 +28,19 @@ function bootstrap_float_form_required_marker($variables) {
 }
 
 /**
- * Implemlents hook_form_alter().
+ * Implements hook_form_alter().
  */
 function bootstrap_float_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'walter_costbenefit_item_edit_form') {
     $form['#attributes']['class'][] = 'bv-form';
-    $form['title']['#prefix'] = '<div class="form-group">';
-    $form['title']['#suffix'] = '</div>';
-    $form['title']['#attributes']['data-bv-field'][] = 'title';
+    bootstrap_float_add_bootstrap_validator_wrapper($form, 'title');
   }
+}
+
+/**
+ * Adds Bootstrap Validator elements for given form element name.
+ */
+function bootstrap_float_add_bootstrap_validator_wrapper(&$form, $name) {
+  $form[$name]['#prefix'] = '<div class="form-group">';
+  $form[$name]['#suffix'] = '</div>';
 }

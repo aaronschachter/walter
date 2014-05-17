@@ -34,11 +34,7 @@ function bootstrap_float_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'walter_costbenefit_item_edit_form') {
     $form['#attributes']['class'][] = 'bv-form';
     $form['title']['#prefix'] = '<div class="form-group">';
-    $form['title']['#suffix'] = bootstrap_float_get_required_error('title') . '</div>';
+    $form['title']['#suffix'] = '</div>';
     $form['title']['#attributes']['data-bv-field'][] = 'title';
   }
-}
-
-function bootstrap_float_get_required_error($name) {
-  return '<small data-bv-validator="notEmpty" data-bv-validator-for="' . $name . '" class="help-block" style="display: none;">The ' . $name . ' is required and cannot be empty</small>';
 }

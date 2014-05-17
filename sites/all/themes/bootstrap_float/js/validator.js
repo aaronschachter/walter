@@ -10,15 +10,15 @@
             },
             fields: {
                 title: {
-                    message: 'The title is not valid',
+                    message: 'The item is not valid',
                     validators: {
                         notEmpty: {
-                            message: 'Please enter a title.'
+                            message: 'Please enter an item.'
                         },
                         stringLength: {
                             min: 3,
                             max: 255,
-                            message: 'Please enter a title.'
+                            message: 'Please enter an item.'
                         },
                     }
                 },

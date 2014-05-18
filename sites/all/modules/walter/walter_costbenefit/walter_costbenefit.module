@@ -302,14 +302,14 @@ function walter_costbenefit_get_cb_id() {
  */
 function _costbenefit_get_box_label($box, $plural = TRUE, $title = NULL) {
   $type = _costbenefit_get_box_type($box, $plural);
-  $action = 'USING';
+  $action = 'doing it';
   if ($box > 2) {
-    $action = 'NOT USING';
+    $action = 'NOT doing it';
   }
   if ($title) {
     $title = ' ' . $title;
   }
-  return $type . ' of ' . $action . $title;
+  return $type . ' of ' . $action;
 }
 
 function _costbenefit_get_box_type($box, $plural = TRUE) {

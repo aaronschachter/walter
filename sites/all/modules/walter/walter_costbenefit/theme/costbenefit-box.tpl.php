@@ -1,7 +1,7 @@
 <div class="cb-box well">
 
   <div>
-    <h4><?php print _costbenefit_get_box_label($vars['box'], TRUE, drupal_get_title()) ?>
+    <h4><?php print _costbenefit_get_box_label($vars['box'], TRUE, $vars['title']) ?>
     <span class="badge"><?php print count($vars['items']); ?></span>
     <button class="btn btn-tertiary pull-right" data-toggle="modal" data-target=".add-item-modal-<?php print $vars['box']; ?>">
       <span class="glyphicon glyphicon-plus"></span>
@@ -22,7 +22,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title">Edit Item</h4>
+              <h4 class="modal-title"><?php print $vars['title'];; ?></h4>
             </div>
             <div class="modal-body">
               <p><?php print render($item->form); ?></p>
@@ -41,7 +41,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Add Item</h4>
+          <h4 class="modal-title"><?php print $vars['title']; ?></h4>
         </div>
         <div class="modal-body">
           <p><?php print render($add_form); ?></p>

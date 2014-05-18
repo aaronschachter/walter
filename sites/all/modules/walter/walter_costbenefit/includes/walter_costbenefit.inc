@@ -58,6 +58,7 @@ class CostbenefitEntityController extends EntityAPIController {
     for ($i = 1; $i <= 4; $i++) {
       $link = 'cb/' . $entity->cb_id . '/add/' . $i;
       $vars = array(
+        'title' => $entity->title,
         'cb_id' => $entity->cb_id,
         'box' => $i,
         'items' => $entity->getBoxItems($i),

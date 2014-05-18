@@ -57,3 +57,32 @@ function bootstrap_float_add_bootstrap_validator_wrapper(&$form, $name) {
   $form[$name]['#prefix'] = '<div class="form-group">';
   $form[$name]['#suffix'] = '</div>';
 }
+
+
+/**
+ * Implements theme_button().
+ *
+ * Here's a good reason why it sucks sometimes to use a starter theme.
+ * The Bootstrap theme is automatically adding btn-success for some reason.
+ *
+ * @see bootstrap_button().
+ *
+ */
+function bootstrap_float_button($variables) {
+  $element = $variables['element'];
+  $label = $element['#value'];
+  element_set_attributes($element, array('id', 'name', 'value', 'type'));
+
+  foreach ($element['#attributes']['class'] as $delta => $class) {
+    // If the success class,
+    if ($class == 'btn-success') {
+      // Replace it with the primary.
+      $element['#attributes']['class'][$delta] = 'btn-primary';
+    }
+  }
+
+  // This line break adds inherent margin between multiple buttons.
+  return '<button' . drupal_attributes($element['#attributes']) . '>' . $label . "</button>\n";
+}
+
+

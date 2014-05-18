@@ -51,14 +51,14 @@ class CostbenefitEntityController extends EntityAPIController {
   public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {
     module_load_include('inc', 'walter_costbenefit', 'walter_costbenefit.forms');
     $build = parent::buildContent($entity, $view_mode, $langcode, $content);
-    $build['title'] = $entity->title;
+    $build['title'] = check_plain($entity->title);
     $build['edit_form'] = drupal_get_form('walter_costbenefit_form', $entity);
     $boxes = array();
     // Loop through the boxes.
     for ($i = 1; $i <= 4; $i++) {
       $link = 'cb/' . $entity->cb_id . '/add/' . $i;
       $vars = array(
-        'title' => $entity->title,
+        'title' => check_plain($entity->title),
         'cb_id' => $entity->cb_id,
         'box' => $i,
         'items' => $entity->getBoxItems($i),

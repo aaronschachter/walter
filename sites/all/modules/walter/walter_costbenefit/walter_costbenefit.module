@@ -182,6 +182,11 @@ function costbenefit_access($entity) {
  * Implements hook_forms().
  */
 function walter_costbenefit_forms($form_id, $args) {
+  // For some reason, add_form_id kept interfering with the
+  // node form for the page content type.  Quick fix.
+  if ($form_id == 'page_node_form') {
+    return;
+  }
   $forms = array();
   $item_add_form_id = 'walter_costbenefit_item_add_form';
   $item_edit_form_id = 'walter_costbenefit_item_edit_form';

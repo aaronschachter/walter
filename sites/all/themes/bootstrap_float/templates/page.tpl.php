@@ -146,7 +146,8 @@ global $user;
   <div class="navbar-collapse collapse pull-right">
     <nav role="navigation">
       <ul class="menu nav navbar-nav">
-        <li><?php print l('About', 'about'); ?></li>
+        <li><?php print l('Terms', 'terms'); ?></li>
+        <li><?php print l('Privacy', 'privacy'); ?></li>
         <li><?php print l('Contact', 'contact'); ?></li>
       </ul>
     </nav>

@@ -20,9 +20,9 @@ project = "bootstrap_library"
 datestamp = "1397009088"
 
 
-; Information added by Drupal.org packaging script on 2014-04-09
-version = "7.x-1.2"
+; Information added by Drupal.org packaging script on 2014-05-11
+version = "7.x-1.4"
 core = "7.x"
 project = "bootstrap_library"
-datestamp = "1397064252"
+datestamp = "1399825431"
 

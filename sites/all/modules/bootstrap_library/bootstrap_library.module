@@ -25,7 +25,7 @@ function bootstrap_library_requirements($phase) {
     }
     else {
       $requirements['boostrap_library_library'] = array(
-        'title' => t('Bootstrat plugin'),
+        'title' => t('Bootstrap plugin'),
         'value' => t('Not installed'),
         'description' => $library['error message'],
         'severity' => REQUIREMENT_ERROR,
@@ -36,7 +36,7 @@ function bootstrap_library_requirements($phase) {
     preg_match('/^(\d+)\.(\d+).*$/', $library['version'], $matches);
     if ( floatval($matches[1] .'.'. $matches[2]) >= 1.7) {
       $requirements['boostrap_library_jquery'] = array(
-        'title' => t('Bootstrat version'),
+        'title' => t('Bootstrap version'),
         'value' => t('jQuery @version', array('@version' => $library['version'])),
         'severity' => REQUIREMENT_OK,
       );
@@ -63,7 +63,16 @@ function bootstrap_library_requirements($phase) {
 function bootstrap_library_init() {
   $settings = variable_get('bootstrap_library_settings');
   if (bootstrap_library_check_path($settings['visibility']['visibility'], $settings['visibility']['pages']) && bootstrap_library_check_theme()) {
-    libraries_load('bootstrap');
+    $types = array_filter($settings['files']['types']);
+    // Load default if both types are selected.
+    if (isset($types['css']) && isset($types['js'])) {
+      libraries_load('bootstrap');
+    }
+    else {
+      // Load the variant.
+      $type = key($types);
+      libraries_load('bootstrap', $type);
+    }
   }
 }
 
@@ -122,15 +131,19 @@ function bootstrap_library_settings($form, &$form_state) {
       $active_themes[$theme->name] = $theme->info['name'];
     }
   }
+  $options['bootstrap'] = array(
+    '#type' => 'vertical_tabs',
+  );
   $options['minimized'] = array(
     '#type' => 'fieldset',
     '#title' => t('Libraries Options'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+    '#group' => 'bootstrap'
   );
   $options['minimized']['options'] = array(
     '#type' => 'radios',
-    '#title' => t('Activate on specific pages'),
+    '#title' => t('Choose minimized or not libraries.'),
     '#options' => array(
       0 => t('Use non minimized libraries (Development)'),
       1 => t('Use minimized libraries (Production)'),
@@ -143,6 +156,7 @@ function bootstrap_library_settings($form, &$form_state) {
     '#title' => t('Pages Visibility'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+    '#group' => 'bootstrap'
   );
   $options['visibility']['visibility'] = array(
     '#type' => 'radios',
@@ -165,6 +179,7 @@ function bootstrap_library_settings($form, &$form_state) {
     '#title' => t('Themes Visibility'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+    '#group' => 'bootstrap'
   );
   $options['theme']['visibility'] = array(
     '#type' => 'radios',
@@ -184,6 +199,24 @@ function bootstrap_library_settings($form, &$form_state) {
     '#description' => t("Specify in which themes you wish the library to load."),
   );
 
+  // Files settings.
+  $options['files'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Files Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#group' => 'bootstrap'
+  );
+  $options['files']['types'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Select which files to load from the library. By default you should check both, but in some cases you will need to load only CSS or JS Bootstrap files.'),
+    '#options' => array(
+      'css' => t('CSS files'),
+      'js' => t('Javascript files'),
+    ),
+    '#default_value' => $settings['files']['types'],
+  );
+
   $options['#tree'] = TRUE;
   $form['bootstrap_library_settings'] = $options;
 
@@ -197,6 +230,7 @@ function bootstrap_library_settings($form, &$form_state) {
 function bootstrap_library_libraries_info() {
   $settings = variable_get('bootstrap_library_settings');
   $min = ($settings['minimized']['options']) ? '.min' : '';
+  $files = _bootstrap_library_get_files($settings['files']['types']['css'], $settings['files']['types']['js'], $min);
   $libraries['bootstrap'] = array(
     'name' => 'Bootstrap',
     'vendor url' => 'http://getbootstrap.com/',
@@ -207,15 +241,8 @@ function bootstrap_library_libraries_info() {
       'pattern' => '/Bootstrap\s+v?([0-9\.]+)/',
       'lines' => 2,
     ),
-    'files' => array(
-      'js' => array(
-        'js/bootstrap' . $min . '.js',
-      ),
-      'css' => array(
-        'css/bootstrap' . $min . '.css',
-        'css/bootstrap-theme' . $min . '.css',
-      ),
-    ),
+    'files' => $files['files'],
+    'variants' => $files['variants'],
   );
 
   return $libraries;
@@ -249,4 +276,29 @@ function bootstrap_library_loaded() {
   else {
     return FALSE;
   }
+}
+
+/**
+ * Define which files needed to be loaded.
+ *
+ * @return
+ *   An array for variants and an array for files.
+ */
+function _bootstrap_library_get_files($css = 1, $js = 1, $min = '') {
+  $js_array = array(
+    'js/bootstrap' . $min . '.js',
+  );
+  $css_array = array(
+    'css/bootstrap' . $min . '.css',
+    'css/bootstrap-theme' . $min . '.css',
+  );
+  if ($css) {
+    $variants['css'] = array( 'files' => array( 'css' => $css_array, ), );
+    $files['css'] = $css_array;
+  }
+  if ($js) {
+    $variants['js'] = array( 'files' => array( 'js' => $js_array, ), );
+    $files['js'] = $js_array;
+  }
+  return array('variants' => $variants, 'files' => $files);
 }

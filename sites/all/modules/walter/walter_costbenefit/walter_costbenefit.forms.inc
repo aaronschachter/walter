@@ -142,10 +142,8 @@ function walter_costbenefit_item_edit_form_submit($form, &$form_state) {
   $entity = costbenefit_item_load($cb_item_id);
   $entity->title = $form_state['values']['title'];
   $entity->type = $form_state['values']['type'];
-  if ($entity->save()) {
-    $form_state['redirect'] = 'cb/' . $entity->cb_id;
-    drupal_set_message("Edited <em>" . $entity->title . "</em>.");
-  }
+  $entity->save();
+  drupal_set_message("Edited <em>" . $entity->title . "</em>.");
 }
 
 /**

@@ -47,6 +47,9 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       drupal_set_title(t("Settings"));
       $form['account']['mail']['#description'] = $email_help;
       unset($form['timezone']);
+      if (module_exists('contact')) {
+        unset($form['contact']);
+      }
       break;
     case 'user_login_block':
     case 'user_login':

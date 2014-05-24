@@ -9,7 +9,7 @@
  */
 function walter_user_menu() {
   $items = array();
-  $items['front'] = array(
+  $items['cb'] = array(
     'page callback' => 'walter_user_front_page',
     'access callback' => TRUE,
     'file' => 'walter_user.pages.inc',

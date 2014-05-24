@@ -1,6 +1,10 @@
 h1.pointer {
   cursor: pointer;
 }
+#user-nav {
+  margin-top: 10px;
+  background-color: #eee;
+}
 .login-block label {
   font-size: 0.8em;
   display: block;

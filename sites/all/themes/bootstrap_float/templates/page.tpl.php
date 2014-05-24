@@ -98,14 +98,20 @@ global $user;
 
 
     <?php if (user_is_logged_in()): ?>
-      <div class="navbar-collapse collapse pull-right">
-        <nav role="navigation">
-          <ul class="menu nav navbar-nav">
-            <li><?php print l($user->mail, 'user/'. $user->uid . '/edit'); ?></li>
-            <li><?php print l('Logout', 'user/logout'); ?></li>
+      <nav role="navigation">
+        <div class="dropdown pull-right">
+          <button class="btn dropdown-toggle" type="button" id="user-nav" data-toggle="dropdown">
+            <?php print $user->mail; ?>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="user-nav">
+            <li role="presentation"><?php print l('Settings', 'user/' . $user->uid . '/edit'); ?></a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><?php print l('Log out', 'user/logout'); ?></a></li>
           </ul>
-        </nav>
-      </div>
+        </div>
+      </nav>
+
     <?php else: ?>
       <div class="pull-right login-block">
       <?php print render($login_form); ?>

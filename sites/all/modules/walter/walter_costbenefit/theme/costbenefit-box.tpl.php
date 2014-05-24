@@ -13,7 +13,7 @@
 
      <div class="box-item">
       <a class="edit-cb_item-link" data-toggle="modal" data-target=".edit-item-modal-<?php print $item->cb_item_id; ?>">
-        <span class="small pull-right"><?php print $item->type_desc; ?></span> <?php print $item->title; ?>
+        <span class="small pull-right"><?php print $item->type_desc; ?></span> <?php print check_plain($item->title); ?>
       </a>
       <!-- Edit item modal -->
       <div class="modal fade edit-item-modal-<?php print $item->cb_item_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

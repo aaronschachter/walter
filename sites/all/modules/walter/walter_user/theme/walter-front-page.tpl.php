@@ -23,6 +23,8 @@
     <div class="">
       <h4>Sign Up</h4>
       <?php print render($register_form); ?>
+      <hr>
+      <p class="legal">By clicking Get Started, you agree to our Terms and that you have read our Privacy Policy.</p>
     </div>
   </div>
 </div>

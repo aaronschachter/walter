@@ -1,4 +1,4 @@
-<header role="banner" id="page-header" class="jumbotron">
+<header role="banner" id="page-header" class="jumbotron front-page">
   <h1>Walter helps you change.</h1>
   <p>It's a web app to help you quit an activity or substance.</p>
 </header>

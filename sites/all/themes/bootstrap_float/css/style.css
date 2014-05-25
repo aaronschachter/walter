@@ -1,6 +1,9 @@
 h1.pointer {
   cursor: pointer;
 }
+.jumbotron.front-page {
+  background-color: white;
+}
 .legal {
   font-size: 0.7em;
   color: #999;

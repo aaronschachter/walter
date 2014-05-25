@@ -54,7 +54,7 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
     case 'user_login_block':
     case 'user_login':
       // Direct user to the front page (overrides Drupal default of /user)
-      $form_state['#redirect'] = 'front';
+      $form_state['redirect'] = 'cb';
       // Overwrite links to get rid of default markup.
       unset($form['links']);
       $form['actions']['submit']['#value'] = t('Sign in');
@@ -77,7 +77,14 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       );
       $form['#submit'][] = 'walter_user_new_user';
       break;
+    case 'user_pass':
+      $form['#submit'][] = 'walter_user_form_redirect';
+      break;
   }
+}
+
+function walter_user_form_redirect($form, &$form_state){
+  $form_state['redirect'] = 'cb';
 }
 
 /**

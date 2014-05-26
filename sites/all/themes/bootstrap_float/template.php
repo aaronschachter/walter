@@ -38,6 +38,7 @@ function bootstrap_float_form_alter(&$form, $form_state, $form_id) {
   if (substr($form_id,0, 6) == 'walter') {
     $form['#attributes']['class'][] = 'bv-form';
     bootstrap_float_add_bootstrap_validator_wrapper($form, 'title');
+    $form['title']['#attributes']['class'][] = 'input-lg';
   }
   switch ($form_id) {
     case 'user_login_block':

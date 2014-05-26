@@ -80,7 +80,6 @@ global $user;
         <li><?php print l('About', 'about'); ?></li>
         <li><?php print l('Terms', 'terms'); ?></li>
         <li><?php print l('Privacy', 'privacy'); ?></li>
-        <li><?php print l('Contact', 'contact'); ?></li>
       </ul>
     </nav>
   </div>

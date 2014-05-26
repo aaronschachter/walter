@@ -11,14 +11,8 @@
       <li class="lead">Keep them on your phone via Walter.</li>
     </ol>
     <hr />
-    <p>The lists together make up a <strong>Cost Benefit Analysis</strong>, a tool used in <a href="http://smartrecovery.org" target="_blank">SMART Recovery</a> to explore the short-term and long-term benefits of it.</p>
-    <p>The next time you feel the urge to indulge, open up Walter and read through your Cost Benefit Analysis. Unfortunately, there are no results guaranteed, but it might just help.</p>
-    <h3>It's private.</h3>
-    <p>Your Cost Benefit Analysis is private and can only be read while logged in to your Walter account.</p>
-    <h3>It's free.</h3>
-    <p>This first version of Walter allows you to access your Cost Benefit Analysis from the web at anytime.</p>
-    <p>iPhone and Android apps are not available yet, but are under development.</p>
-    <p>Sign up for <strong>Walter</strong> to create and maintain your own private Cost Benefit Analysis.</p>
+    <p>The lists together make up a <strong>Cost Benefit Analysis</strong>, a tool used in <a href="http://smartrecovery.org" target="_blank">SMART Recovery</a> to explore the short-term and long-term
+      benefits of doing/using.</p>
   </div>
   <div class="col-md-4">
     <div class="well">

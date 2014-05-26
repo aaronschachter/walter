@@ -74,13 +74,11 @@ global $user;
   </div>
 </div>
 <footer class="footer container">
-  <div class="navbar-collapse collapse pull-right">
-    <nav role="navigation">
-      <ul class="menu nav navbar-nav">
-        <li><?php print l('About', 'about'); ?></li>
-        <li><?php print l('Terms', 'terms'); ?></li>
-        <li><?php print l('Privacy', 'privacy'); ?></li>
-      </ul>
-    </nav>
-  </div>
+  <nav role="navigation">
+    <ul class="menu nav navbar-nav navbar-right">
+      <li><?php print l('About', 'about'); ?></li>
+      <li><?php print l('Terms', 'terms'); ?></li>
+      <li><?php print l('Privacy', 'privacy'); ?></li>
+    </ul>
+  </nav>
 </footer>

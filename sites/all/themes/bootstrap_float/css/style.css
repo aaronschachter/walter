@@ -59,3 +59,7 @@ a.edit-cb_item-link {
   margin-top: 20px;
   border-top: 1px solid #ccc;
 }
+.footer a {
+  color: #333;
+  font-size: 0.8em;
+}

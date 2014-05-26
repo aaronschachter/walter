@@ -42,8 +42,11 @@ function bootstrap_float_form_alter(&$form, $form_state, $form_id) {
   }
   switch ($form_id) {
     case 'user_login_block':
-      $form['#attributes']['class'][] = 'form-inline';
-      $form['pass']['#description'] =  l("Forgot password?", 'user/password');
+      $form['#attributes']['class'][] = 'navbar-form';
+      unset($form['name']['#title']);
+      unset($form['pass']['#title']);
+      $form['name']['#attributes']['placeholder'] = 'Email address';
+      $form['pass']['#attributes']['placeholder'] = 'Password';
       break;
     case 'user_pass':
       drupal_set_title("Password reset");

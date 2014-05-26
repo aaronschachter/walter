@@ -6,45 +6,42 @@
  */
 global $user;
 ?>
-<header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
+
+<nav class="navbar navbar-default" role="navigation" class="<?php print $navbar_classes; ?>">
   <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <?php if ($logo): ?>
-      <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-        <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-      </a>
-      <?php endif; ?>
-
-      <?php if (!empty($site_name)): ?>
-      <a class="name navbar-brand" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
-      <?php endif; ?>
-
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<?php print $front_page; ?>">Walter</a>
     </div>
 
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-    <?php if (user_is_logged_in()): ?>
-      <nav role="navigation">
-        <div class="dropdown pull-right">
-          <button class="btn dropdown-toggle" type="button" id="user-nav" data-toggle="dropdown">
-            <?php print $user->mail; ?>
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="user-nav">
-            <li role="presentation"><?php print l('Settings', 'user/' . $user->uid . '/edit'); ?></li>
-            <li role="presentation" class="divider"></li>
-            <li role="presentation"><?php print l('Log out', 'user/logout'); ?></li>
+      <?php if (user_is_logged_in()): ?>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php print $user->mail; ?> <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><?php print l('Settings', 'user/' . $user->uid . '/edit'); ?></li>
+            <li class="divider"></li>
+            <li><?php print l('Log out', 'user/logout'); ?></li>
           </ul>
-        </div>
-      </nav>
-
-    <?php else: ?>
-      <div class="pull-right login-block">
-      <?php print render($login_form); ?>
+        </li>
+      </ul>
+      <?php else: ?>
+      <div class="navbar-right">
+        <?php print render($login_form); ?>
       </div>
-    <?php endif; ?>
-
-  </div>
-</header>
+      <?php endif; ?>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
 <div class="main-container container">
 

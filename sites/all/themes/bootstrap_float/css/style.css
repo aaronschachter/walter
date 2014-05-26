@@ -19,24 +19,8 @@ p.help-block {
   font-size: 0.7em;
   color: #999;
 }
-#user-nav {
-  margin-top: 10px;
-  background-color: #eee;
-}
-.login-block label {
-  font-size: 0.8em;
-  display: block;
-}
-.login-block{
-  padding: 0 10px 0 0;
-}
-.login-block .form-item-pass {
-  margin-top: 28px;
-}
-.login-block .btn-primary {
-  margin-top: 14px;
-  margin-left: 14px;
-}
+
+
 a.edit-cb_item-link {
   cursor: pointer;
   text-decoration: none;

@@ -1,9 +1,9 @@
 
-<span data-toggle="modal" data-target=".edit-title-modal">
-   <h1 class="page-header pointer"><?php print $title; ?></h1>
-</span>
-
-
+<h1 class="page-header"><?php print $title; ?>
+  <span data-toggle="modal" data-target=".edit-costbenefit-title-modal">
+    <span class="glyphicon glyphicon-pencil btn">Edit</span>
+  </span>
+</h1>
 
 <div class="row">
   <div class="col-md-6"><?php print render($content['boxes'][1]); ?></div>
@@ -19,7 +19,7 @@
 
 
 <!-- Edit title modal -->
-<div class="modal fade edit-title-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade edit-costbenefit-title-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">

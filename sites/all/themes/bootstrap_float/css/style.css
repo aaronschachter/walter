@@ -1,8 +1,15 @@
-h1.pointer {
-  cursor: pointer;
-}
 .jumbotron.front-page {
   background-color: white;
+}
+h1.page-header {
+  display: inline-block;
+}
+.page-header .btn {
+   visibility: hidden;
+}
+
+.page-header:hover .btn {
+   visibility: visible;
 }
 .legal {
   font-size: 0.7em;

@@ -11,6 +11,10 @@ h1.page-header {
 .page-header:hover .btn {
    visibility: visible;
 }
+p.help-block {
+  font-size: 0.7em;
+  color: #999;
+}
 .legal {
   font-size: 0.7em;
   color: #999;

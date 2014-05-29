@@ -138,6 +138,22 @@ function walter_costbenefit_theme($existing, $type, $theme, $path) {
 }
 
 /**
+ * Implements hook_user_delete().
+ */
+function walter_costbenefit_user_delete($account) {
+  // Find user's cb_id.
+  $cb_id = walter_costbenefit_get_cb_id($account);
+  // Delete all cb items from it.
+  db_delete('costbenefit_item')
+  ->condition('cb_id', $cb_id)
+  ->execute();
+  // Delete the cb.
+  db_delete('costbenefit')
+  ->condition('cb_id', $cb_id)
+  ->execute();
+}
+
+/**
  * Process variables for entity.tpl.php.
  *
  * @see template_preprocess_entity in Entity API module.
@@ -287,11 +303,14 @@ function walter_costbenefit_views_data() {
 /**
  * Gets logged in user's costbenefit cb_id.
  */
-function walter_costbenefit_get_cb_id() {
-  global $user;
+function walter_costbenefit_get_cb_id($account = NULL) {
+  if ($account == NULL) {
+    global $user;
+    $account = $user;
+  }
   return db_select("costbenefit", "cb")
     ->fields("cb", array("cb_id"))
-    ->condition("uid", $user->uid)
+    ->condition("uid", $account->uid)
     ->execute()
     ->fetchField();
 }

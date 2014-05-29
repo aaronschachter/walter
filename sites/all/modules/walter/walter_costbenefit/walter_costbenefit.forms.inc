@@ -200,7 +200,7 @@ function _get_costbenefit_form_submit_element($label) {
     '#attributes' => array(
       'class' => array('btn-primary'),
     ),
-    '#prefix' => '<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>',
+    '#prefix' => '<div class="modal-footer"><button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Cancel</button>',
     '#suffix' => '</div>'
   );
 }

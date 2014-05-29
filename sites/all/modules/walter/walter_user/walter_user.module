@@ -110,3 +110,13 @@ function walter_user_new_user($form, &$form_state) {
   // Redirect to the newly created costbenefit.
   drupal_goto('cb/' . $entity->cb_id);
 }
+
+/**
+ * Implements hook_email_registration_name().
+ *
+ * Hook defined by email_registration module.
+ */
+function walter_user_email_registration_name($edit, $account) {
+  // Sets username as email.
+  return $account->mail;
+}

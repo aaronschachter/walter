@@ -165,6 +165,34 @@ function walter_costbenefit_services_resources() {
         'access callback' => '_walter_costbenefit_resource_access',
       ),
     ),
+    'actions' => array(
+      'add_item' => array(
+        'help' => 'Add a cb_item',
+        'file' => array(
+          'type' => 'inc', 
+          'module' => 'walter_costbenefit', 
+          'name' => 'resources/walter_costbenefit.resource'
+        ),
+        'callback' => '_walter_costbenefit_resource_add_item',
+        'args' => array(
+          array(
+            'name' => 'cb_id',
+            'optional' => FALSE,
+            'source' => array('data' => 'cb_id'),
+            'type' => 'int',
+            'description' => 'The cb_id of the costbenefit to add cb_item for.',
+          ),
+          array(
+            'name' => 'title',
+            'optional' => FALSE,
+            'source' => array('data' => 'title'),
+            'type' => 'string',
+            'description' => 'The title of the cb_item to add.',
+          ),
+        ),
+        'access callback' => '_walter_costbenefit_resource_access',
+      ),
+    ),
   );
   return $resources;
 }

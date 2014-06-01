@@ -137,6 +137,37 @@ function walter_costbenefit_theme($existing, $type, $theme, $path) {
   );
 }
 
+
+/**
+ * Implements hook_services_resources().
+ */
+function walter_costbenefit_services_resources() {
+  $resources = array();
+  $resources['costbenefit'] = array(
+    'operations' => array(
+      'retrieve' => array(
+        'help' => 'Retrieve users costbenefit cb_id.',
+        'file' => array(
+          'type' => 'inc', 
+          'module' => 'walter_costbenefit', 
+          'name' => 'resources/walter_costbenefit.resource'
+        ),
+        'callback' => '_walter_costbenefit_resource_retrieve',
+        'args' => array(
+          array(
+            'name' => 'uid',
+            'optional' => FALSE,
+            'source' => array('path' => 0),
+            'type' => 'int',
+            'description' => 'The uid of the user to retrieve cb_id for.',
+          ),
+        ),
+        'access callback' => '_walter_costbenefit_resource_access',
+      ),
+    ),
+  );
+  return $resources;
+}
 /**
  * Implements hook_user_delete().
  */

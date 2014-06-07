@@ -12,6 +12,17 @@ class CostbenefitEntity extends Entity {
   protected $item_table = 'costbenefit_item';
 
   /**
+   * Override construct to add box items.
+   */
+  public function __construct(array $values = array(), $entityType = NULL) {
+    parent::__construct($values, $entityType);
+    for ($i=0; $i < 4; $i++) {
+      $box = 'box_'. $i;
+      $this->{$box} = $this->getBoxItems($i, FALSE);
+    }
+  }
+
+  /**
    * Override this in order to implement a custom default URI.
    */
   protected function defaultUri() {
@@ -21,19 +32,24 @@ class CostbenefitEntity extends Entity {
   /**
    * Returns array of costbenefit_item objects for entity's given $box.
    */
-  public function getBoxItems($box) {
+  public function getBoxItems($box, $include_form = TRUE) {
     $items = array();
     $query = db_select($this->item_table, 'cbi')
       ->fields('cbi')
       ->condition('cb_id', $this->cb_id)
       ->condition('box', $box);
     $result = $query->execute()->fetchAll();
+
     foreach ($result as $delta => $record) {
       $item_entity = costbenefit_item_load($record->cb_item_id);
-      $items[$delta] = $record;
+      $items[$delta]->cb_item_id = $item_entity->cb_item_id;
+      $items[$delta]->title = $item_entity->title;
       $items[$delta]->type_desc = $record->type ? 'Long term' : 'Short term';
-      $items[$delta]->form = drupal_get_form('walter_costbenefit_item_edit_form', $item_entity);
+      if ($include_form) {
+        $items[$delta]->form = drupal_get_form('walter_costbenefit_item_edit_form', $item_entity);
+      }
     }
+
     return $items;
   }
 }

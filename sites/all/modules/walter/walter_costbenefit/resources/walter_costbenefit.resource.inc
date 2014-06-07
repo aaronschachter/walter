@@ -10,14 +10,11 @@ function _walter_costbenefit_resource_access() {
 }
 
 /**
- * Retrieves costbenefit data for given $uid.
+ * Retrieves costbenefit entity for given $cb_id.
  */
-function _walter_costbenefit_resource_retrieve($uid) {
-  // This is silly.  
-  // @todo: Change get_cb_id to retrieve for $uid instead of $user object.
-  $account = user_load($uid);
-  if ($cb_id = walter_costbenefit_get_cb_id($account)) {
-    return costbenefit_load($cb_id);
+function _walter_costbenefit_resource_retrieve($cb_id) {
+  if ($entity = costbenefit_load($cb_id)) {
+    return $entity;
   }
   return FALSE;
 }

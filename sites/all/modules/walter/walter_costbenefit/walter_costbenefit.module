@@ -146,7 +146,7 @@ function walter_costbenefit_services_resources() {
   $resources['costbenefit'] = array(
     'operations' => array(
       'retrieve' => array(
-        'help' => 'Retrieve users costbenefit cb_id.',
+        'help' => 'Retrieve a costbenefit.',
         'file' => array(
           'type' => 'inc', 
           'module' => 'walter_costbenefit', 
@@ -155,11 +155,11 @@ function walter_costbenefit_services_resources() {
         'callback' => '_walter_costbenefit_resource_retrieve',
         'args' => array(
           array(
-            'name' => 'uid',
+            'name' => 'cb_id',
             'optional' => FALSE,
             'source' => array('path' => 0),
             'type' => 'int',
-            'description' => 'The uid of the user to retrieve cb_id for.',
+            'description' => 'The cb_id of the costbenefit to retrieve.',
           ),
         ),
         'access callback' => '_walter_costbenefit_resource_access',

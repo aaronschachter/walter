@@ -16,9 +16,8 @@ class CostbenefitEntity extends Entity {
    */
   public function __construct(array $values = array(), $entityType = NULL) {
     parent::__construct($values, $entityType);
-    for ($i=0; $i < 4; $i++) {
-      $box = 'box_'. $i;
-      $this->{$box} = $this->getBoxItems($i, FALSE);
+    for ($i= 1; $i <= 4; $i++) {
+      $this->boxes[$i] = $this->getBoxItems($i, FALSE);
     }
   }
 

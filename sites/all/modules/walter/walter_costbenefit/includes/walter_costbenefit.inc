@@ -43,6 +43,7 @@ class CostbenefitEntity extends Entity {
 
     foreach ($result as $delta => $record) {
       $item_entity = costbenefit_item_load($record->cb_item_id);
+      $items[$delta] = new StdClass();
       $items[$delta]->cb_item_id = $item_entity->cb_item_id;
       $items[$delta]->title = $item_entity->title;
       $items[$delta]->type_desc = $record->type ? 'Long term' : 'Short term';

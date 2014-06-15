@@ -401,6 +401,17 @@ function walter_costbenefit_get_cb_id($account = NULL) {
 }
 
 /**
+ * Gets author of given $cb_id.
+ */
+function walter_costbenefit_get_cb_uid($cb_id) {
+  return db_select("costbenefit", "cb")
+    ->fields("cb", array("uid"))
+    ->condition("cb_id", $cb_id)
+    ->execute()
+    ->fetchField();
+}
+
+/**
  * ------------------------------------------------------------
  * HELPERS
  * ------------------------------------------------------------

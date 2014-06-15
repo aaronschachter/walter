@@ -38,7 +38,7 @@ function walter_costbenefit_default_services_endpoint() {
   );
   $endpoint->resources = array(
     'entity_costbenefit' => array(
-      'alias' => 'costbenefit',
+      'alias' => 'costbenefits',
       'operations' => array(
         'retrieve' => array(
           'enabled' => '1',
@@ -46,7 +46,7 @@ function walter_costbenefit_default_services_endpoint() {
       ),
     ),
     'entity_costbenefit_item' => array(
-      'alias' => 'costbenefit_item',
+      'alias' => 'costbenefit_items',
       'operations' => array(
         'create' => array(
           'enabled' => '1',

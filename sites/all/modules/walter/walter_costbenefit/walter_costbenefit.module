@@ -214,66 +214,6 @@ function walter_costbenefit_entity_property_info() {
 }
 
 /**
- * Implements hook_services_resources().
- */
-function walter_costbenefit_services_resources() {
-  $resources = array();
-  $resources['costbenefit'] = array(
-    'operations' => array(
-      'retrieve' => array(
-        'help' => 'Retrieve a costbenefit.',
-        'file' => array(
-          'type' => 'inc',
-          'module' => 'walter_costbenefit',
-          'name' => 'resources/walter_costbenefit.resource'
-        ),
-        'callback' => '_walter_costbenefit_resource_retrieve',
-        'args' => array(
-          array(
-            'name' => 'cb_id',
-            'optional' => FALSE,
-            'source' => array('path' => 0),
-            'type' => 'int',
-            'description' => 'The cb_id of the costbenefit to retrieve.',
-          ),
-        ),
-        'access callback' => '_walter_costbenefit_resource_access',
-        'access arguments append' => TRUE,
-      ),
-    ),
-    'actions' => array(
-      'add_item' => array(
-        'help' => 'Add a cb_item',
-        'file' => array(
-          'type' => 'inc',
-          'module' => 'walter_costbenefit',
-          'name' => 'resources/walter_costbenefit.resource'
-        ),
-        'callback' => '_walter_costbenefit_resource_add_item',
-        'args' => array(
-          array(
-            'name' => 'cb_id',
-            'optional' => FALSE,
-            'source' => array('data' => 'cb_id'),
-            'type' => 'int',
-            'description' => 'The cb_id of the costbenefit to add cb_item for.',
-          ),
-          array(
-            'name' => 'title',
-            'optional' => FALSE,
-            'source' => array('data' => 'title'),
-            'type' => 'string',
-            'description' => 'The title of the cb_item to add.',
-          ),
-        ),
-        'access callback' => '_walter_costbenefit_resource_access',
-      ),
-    ),
-  );
-  return $resources;
-}
-
-/**
  * Implements hook_user_load().
  *
  * Adds a property for the user's cb_id.

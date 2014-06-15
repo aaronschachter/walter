@@ -148,8 +148,8 @@ function walter_costbenefit_services_resources() {
       'retrieve' => array(
         'help' => 'Retrieve a costbenefit.',
         'file' => array(
-          'type' => 'inc', 
-          'module' => 'walter_costbenefit', 
+          'type' => 'inc',
+          'module' => 'walter_costbenefit',
           'name' => 'resources/walter_costbenefit.resource'
         ),
         'callback' => '_walter_costbenefit_resource_retrieve',
@@ -163,14 +163,15 @@ function walter_costbenefit_services_resources() {
           ),
         ),
         'access callback' => '_walter_costbenefit_resource_access',
+        'access arguments append' => TRUE,
       ),
     ),
     'actions' => array(
       'add_item' => array(
         'help' => 'Add a cb_item',
         'file' => array(
-          'type' => 'inc', 
-          'module' => 'walter_costbenefit', 
+          'type' => 'inc',
+          'module' => 'walter_costbenefit',
           'name' => 'resources/walter_costbenefit.resource'
         ),
         'callback' => '_walter_costbenefit_resource_add_item',

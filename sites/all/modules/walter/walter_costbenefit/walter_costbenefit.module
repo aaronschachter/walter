@@ -81,6 +81,7 @@ function walter_costbenefit_entity_info() {
     'uri callback' => 'entity_class_uri',
     'controller class' => 'CostbenefitEntityController',
     'module' => 'walter_costbenefit',
+    'access callback' => 'walter_costbenefit_access',
   );
   $info['costbenefit_item'] = array(
     'label' => t('Cost-Benefit Item'),
@@ -93,6 +94,7 @@ function walter_costbenefit_entity_info() {
     'uri callback' => 'entity_class_uri',
     'controller class' => 'CostbenefitItemEntityController',
     'module' => 'walter_costbenefit',
+    'access callback' => 'walter_costbenefit_item_access',
   );
   return $info;
 }
@@ -258,7 +260,18 @@ function walter_costbenefit_get_title($op, $entity) {
 /**
  * Access callback for costbenefit and costbenefit_item pages.
  */
-function costbenefit_access($entity) {
+function walter_costbenefit_access($op, $entity) {
+  global $user;
+  if ($user->uid == 1) {
+    return TRUE;
+  }
+  return $user->uid == $entity->uid;
+}
+
+/**
+ * Access callback for costbenefit and costbenefit_item pages.
+ */
+function walter_costbenefit_item_access($op, $entity) {
   global $user;
   if ($user->uid == 1) {
     return TRUE;

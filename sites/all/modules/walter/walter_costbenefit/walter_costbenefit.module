@@ -197,6 +197,18 @@ function walter_costbenefit_services_resources() {
   );
   return $resources;
 }
+
+/**
+ * Implements hook_user_load().
+ *
+ * Adds a property for the user's cb_id.
+ */
+function walter_costbenefit_user_load($users) {
+  foreach ($users as $user) {
+    $user->cb_id = walter_costbenefit_get_cb_id($user);
+  }
+}
+
 /**
  * Implements hook_user_delete().
  */

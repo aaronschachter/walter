@@ -117,6 +117,15 @@ class CostbenefitEntityController extends EntityAPIController {
 class CostbenefitItemEntity extends Entity {
 
   /**
+   * Override construct to add the parent CB uid.
+   */
+  public function __construct(array $values = array(), $entityType = NULL) {
+    parent::__construct($values, $entityType);
+    // Store the cb uid on this for easy access.
+    $this->uid = walter_costbenefit_get_cb_uid($this->cb_id);
+  }
+
+  /**
    * Override this in order to implement a custom default URI.
    */
   protected function defaultUri() {

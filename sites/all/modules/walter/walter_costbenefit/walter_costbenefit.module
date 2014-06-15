@@ -18,7 +18,7 @@ function walter_costbenefit_menu() {
     'page callback' => 'walter_costbenefit_view_entity',
     'page arguments' => array(1),
     'access callback' => 'costbenefit_access',
-    'access arguments' => array(1),
+    'access arguments' => array('view', 1),
   );
   $items['cb/%costbenefit/edit'] = array(
     'title callback' => 'walter_costbenefit_get_title',
@@ -26,7 +26,7 @@ function walter_costbenefit_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('walter_costbenefit_form', 1),
     'access callback' => 'costbenefit_access',
-    'access arguments' => array(1),
+    'access arguments' => array('update', 1),
     'file' => 'walter_costbenefit.forms.inc',
   );
   $items['cb/add'] = array(
@@ -43,7 +43,7 @@ function walter_costbenefit_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_item_add_form', 1, 3),
     'access callback' => 'costbenefit_access',
-    'access arguments' => array(1),
+    'access arguments' => array('update', 1),
     'file' => 'walter_costbenefit.forms.inc',
   );
   $items['cb/%costbenefit/%costbenefit_item'] = array(
@@ -51,7 +51,7 @@ function walter_costbenefit_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_item_edit_form', 2),
     'access callback' => 'costbenefit_access',
-    'access arguments' => array(1),
+    'access arguments' => array('update', 1),
     'file' => 'walter_costbenefit.forms.inc',
   );
   $items['cb/%costbenefit/%costbenefit_item/delete'] = array(
@@ -59,7 +59,7 @@ function walter_costbenefit_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('costbenefit_item_delete_form', 2),
     'access callback' => 'costbenefit_access',
-    'access arguments' => array(1),
+    'access arguments' => array('delete', 1),
     'file' => 'walter_costbenefit.forms.inc',
   );
   return $items;
@@ -81,7 +81,7 @@ function walter_costbenefit_entity_info() {
     'uri callback' => 'entity_class_uri',
     'controller class' => 'CostbenefitEntityController',
     'module' => 'walter_costbenefit',
-    'access callback' => 'walter_costbenefit_access',
+    'access callback' => 'costbenefit_access',
   );
   $info['costbenefit_item'] = array(
     'label' => t('Cost-Benefit Item'),
@@ -94,7 +94,7 @@ function walter_costbenefit_entity_info() {
     'uri callback' => 'entity_class_uri',
     'controller class' => 'CostbenefitItemEntityController',
     'module' => 'walter_costbenefit',
-    'access callback' => 'walter_costbenefit_item_access',
+    'access callback' => 'costbenefit_item_access',
   );
   return $info;
 }
@@ -260,7 +260,7 @@ function walter_costbenefit_get_title($op, $entity) {
 /**
  * Access callback for costbenefit and costbenefit_item pages.
  */
-function walter_costbenefit_access($op, $entity) {
+function costbenefit_access($op, $entity) {
   global $user;
   if ($user->uid == 1) {
     return TRUE;
@@ -271,7 +271,7 @@ function walter_costbenefit_access($op, $entity) {
 /**
  * Access callback for costbenefit and costbenefit_item pages.
  */
-function walter_costbenefit_item_access($op, $entity) {
+function costbenefit_item_access($op, $entity) {
   global $user;
   if ($user->uid == 1) {
     return TRUE;

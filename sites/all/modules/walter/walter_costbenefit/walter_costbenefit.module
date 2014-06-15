@@ -139,6 +139,79 @@ function walter_costbenefit_theme($existing, $type, $theme, $path) {
   );
 }
 
+/**
+ * Implements hook_entity_property_info().
+ */
+function walter_costbenefit_entity_property_info() {
+  $info = array();
+  $properties = &$info['costbenefit']['properties'];
+  $properties['cb_id'] = array(
+    'label' => t('Costbenefit cb_id'),
+    'type' => 'integer',
+    'schema field' => 'cb_id',
+    'entity views field' => TRUE,
+  );
+  $properties['uid'] = array(
+    'label' => t('User uid'),
+    'description' => t('The user uid of the reportback.'),
+    'type' => 'user',
+    'schema field' => 'uid',
+    'required' => TRUE,
+    'entity views field' => TRUE,
+    'setter callback' => 'entity_property_verbatim_set',
+  );
+  $properties['title'] = array(
+    'label' => t('Title'),
+    'type' => 'text',
+    'required' => TRUE,
+    'schema field' => 'title',
+    'setter callback' => 'entity_property_verbatim_set',
+  );
+  $properties = &$info['costbenefit_item']['properties'];
+  $properties['cb_item_id'] = array(
+    'label' => t('Costbenefit cb_item_id'),
+    'type' => 'integer',
+    'schema field' => 'cb_item_id',
+    'entity views field' => TRUE,
+  );
+  $properties['cb_id'] = array(
+    'label' => t('Costbenefit cb_id'),
+    'type' => 'costbenefit',
+    'schema field' => 'cb_id',
+    'required' => TRUE,
+    'entity views field' => TRUE,
+    'setter callback' => 'entity_property_verbatim_set',
+  );
+  $properties['title'] = array(
+    'label' => t('Title'),
+    'type' => 'text',
+    'required' => TRUE,
+    'schema field' => 'title',
+    'setter callback' => 'entity_property_verbatim_set',
+  );
+  $properties['box'] = array(
+    'label' => t('Box'),
+    'type' => 'integer',
+    'required' => TRUE,
+    'schema field' => 'box',
+    'setter callback' => 'entity_property_verbatim_set',
+  );
+  $properties['type'] = array(
+    'label' => t('Type'),
+    'type' => 'integer',
+    'required' => TRUE,
+    'schema field' => 'type',
+    'setter callback' => 'entity_property_verbatim_set',
+  );
+  $properties['seq'] = array(
+    'label' => t('Seq'),
+    'type' => 'integer',
+    'required' => TRUE,
+    'schema field' => 'seq',
+    'setter callback' => 'entity_property_verbatim_set',
+  );
+  return $info;
+}
 
 /**
  * Implements hook_services_resources().

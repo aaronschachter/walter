@@ -278,7 +278,7 @@ function costbenefit_access($op, $entity) {
   if ($user->uid == 1) {
     return TRUE;
   }
-  return $user->uid == $entity->uid;
+  return $user->uid == $entity->getUid();
 }
 
 /**

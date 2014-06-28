@@ -31,6 +31,13 @@ class CostbenefitEntity extends Entity {
   }
 
   /**
+   * Override this in order to implement a custom default URI.
+   */
+  public function getUid() {
+    return $this->uid;
+  }
+
+  /**
    * Returns array of costbenefit_item objects for entity's given $box.
    */
   public function getBoxItems($box, $include_form = TRUE) {
@@ -121,8 +128,6 @@ class CostbenefitItemEntity extends Entity {
    */
   public function __construct(array $values = array(), $entityType = NULL) {
     parent::__construct($values, $entityType);
-    // Store the cb uid on this for easy access.
-    $this->uid = walter_costbenefit_get_cb_uid($this->cb_id);
   }
 
   /**
@@ -130,6 +135,10 @@ class CostbenefitItemEntity extends Entity {
    */
   protected function defaultUri() {
     return array('path' => 'cb-item/' . $this->identifier());
+  }
+
+  public function getUid() {
+    return walter_costbenefit_get_cb_uid($this->cb_id);
   }
 }
 

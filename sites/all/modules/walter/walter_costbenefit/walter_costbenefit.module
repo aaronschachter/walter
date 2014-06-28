@@ -32,7 +32,7 @@ function walter_costbenefit_menu() {
   $items['cb/add'] = array(
     'title' => 'New Cost-Benefit Matrix',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('costbenefit_form', NULL),
+    'page arguments' => array('walter_costbenefit_form', NULL),
     'access callback' => 'user_is_logged_in',
     'file' => 'walter_costbenefit.forms.inc',
   );

@@ -116,6 +116,22 @@ function costbenefit_item_load($cb_item_id) {
 }
 
 /**
+ * Implements hook_permission().
+ */
+function walter_costbenefit_permission() {
+  return array(
+    'create costbenefit' => array(
+      'title' => t('Create costbenefit'),
+      'description' => t('Create an additional costbenefit'),
+    ),
+    'delete own costbenefit' => array(
+      'title' => t('Delete own costbenefit'),
+      'description' => t('Delete own costbenefit'),
+    ),
+  );
+}
+
+/**
  * Implements hook_theme().
  */
 function walter_costbenefit_theme($existing, $type, $theme, $path) {
@@ -316,9 +332,12 @@ function walter_costbenefit_index() {
  */
 function walter_costbenefit_index_item_list() {
   $items = array();
+  if (!user_access('create costbenefit')) { return $items; }
+
   foreach (walter_costbenefit_index() as $item) {
     $items[] = l($item->title, $item->path);
   }
+  $items[] = l(' + New CBA', 'cb/add', array('html' => TRUE));
   return $items;
 }
 

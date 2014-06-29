@@ -28,11 +28,14 @@ global $user;
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php print $user->mail; ?> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <?php foreach ($costbenefit_list as $item): ?>
+            <!-- Multi CB nav -->
+            <?php if (!empty($costbenefit_nav)): ?>
+            <?php foreach ($costbenefit_nav as $item): ?>
               <li><?php print $item; ?></li>
             <?php endforeach; ?>
-            <li><?php print l(' + New CBA', 'cb/add', array('html' => TRUE)); ?></li>
             <li class="divider"></li>
+            <?php endif; ?>
+            <!-- User account nav -->
             <li role="presentation" class="dropdown-header">My account</li>
             <li><?php print l('Settings', 'user/' . $user->uid . '/edit'); ?></li>
             <li><?php print l('Log out', 'user/logout'); ?></li>

@@ -19,6 +19,8 @@ function bootstrap_float_preprocess_page(&$variables) {
     $variables['login_form'] = drupal_get_form('user_login_block');
   }
   else {
+    $icon = '<span class="glyphicon glyphicon-user"></span> ';
+    $variables['user_name'] = $icon . walter_user_get_first_name();
     $variables['costbenefit_nav'] = walter_costbenefit_index_item_list();
   }
   // Adds Bootstrap Validator files.

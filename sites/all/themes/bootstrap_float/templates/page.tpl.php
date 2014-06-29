@@ -26,7 +26,7 @@ global $user;
       <?php if (user_is_logged_in()): ?>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php print $user->mail; ?> <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php print $user_name; ?> <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <!-- Multi CB nav -->
             <?php if (!empty($costbenefit_nav)): ?>

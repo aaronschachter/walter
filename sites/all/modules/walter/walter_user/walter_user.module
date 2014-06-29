@@ -126,12 +126,30 @@ function walter_user_email_registration_name($edit, $account) {
 /**
  * Helper function to return global $user's first name.
  */
-function walter_user_get_first_name() {
-  global $user;
-  $account = user_load($user->uid);
+function walter_user_get_first_name($account = NULL) {
+  if (!$account) {
+    global $user;
+    $account = $user;
+  }
+  $account = user_load($account->uid);
   if (isset($account->field_first_name[LANGUAGE_NONE][0]['value'])) {
     return $account->field_first_name[LANGUAGE_NONE][0]['value'];
   }
   // Return email as default if no first name is set.
   return $account->mail;
+}
+
+function walter_user_get_api_user($account = NULL) {
+  if (!$account) {
+    global $user;
+    $account = $user;
+  }
+  $account = user_load($account->uid);
+  $return = new StdClass();
+  $return->uid = $account->uid;
+  $return->email = $account->mail;
+  $return->first_name = walter_user_get_first_name($account);
+  $return->created = $account->created;
+  $return->last_login = $account->login;
+  return $return;
 }

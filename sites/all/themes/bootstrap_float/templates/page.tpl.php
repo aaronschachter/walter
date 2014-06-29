@@ -28,7 +28,9 @@ global $user;
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php print $user->mail; ?> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <?php print render($costbenefit_nav); ?>
+            <?php foreach ($costbenefit_list as $item): ?>
+              <li><?php print $item; ?></li>
+            <?php endforeach; ?>
             <li><?php print l('Add new', 'cb/add'); ?></li>
             <li class="divider"></li>
             <li><?php print l('My account', 'user/' . $user->uid . '/edit'); ?></li>

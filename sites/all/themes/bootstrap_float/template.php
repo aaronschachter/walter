@@ -19,11 +19,7 @@ function bootstrap_float_preprocess_page(&$variables) {
     $variables['login_form'] = drupal_get_form('user_login_block');
   }
   else {
-    $items = walter_costbenefit_index_item_list();
-    $variables['costbenefit_nav'] = theme('item_list', array(
-        'items' => $items,
-      )
-    );
+    $variables['costbenefit_list'] = walter_costbenefit_index_item_list();
   }
   // Adds Bootstrap Validator files.
   drupal_add_css(drupal_get_path('theme', 'bootstrap_float') . '/validator/css/bootstrapValidator.min.css');

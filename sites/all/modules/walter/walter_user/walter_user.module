@@ -71,9 +71,11 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       $form['actions']['submit']['#prefix'] = '<p class="text-right">';
       $form['actions']['submit']['#suffix'] = '</p>';
       $form['title'] = array(
+        '#prefix' => '<hr />',
         '#type' => 'textfield',
         '#title' => t("The activity or substance is:"),
         '#required' => TRUE,
+        '#weight' => 100,
       );
       $form['#submit'][] = 'walter_user_new_user';
       break;

@@ -164,6 +164,7 @@ function walter_user_get_api_user($account = NULL) {
 function walter_user_services_request_postprocess_alter($controller, $args, &$result) {
   switch ($controller['callback']) {
     case '_system_resource_connect':
+    case '_user_resource_login':
       $result->user = walter_user_get_api_user($result->user);
       break;
     case '_user_resource_retrieve':

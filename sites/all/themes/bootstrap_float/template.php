@@ -18,6 +18,13 @@ function bootstrap_float_preprocess_page(&$variables) {
   if (!user_is_logged_in()) {
     $variables['login_form'] = drupal_get_form('user_login_block');
   }
+  else {
+    $items = walter_costbenefit_index_item_list();
+    $variables['costbenefit_nav'] = theme('item_list', array(
+        'items' => $items,
+      )
+    );
+  }
   // Adds Bootstrap Validator files.
   drupal_add_css(drupal_get_path('theme', 'bootstrap_float') . '/validator/css/bootstrapValidator.min.css');
   drupal_add_js(drupal_get_path('theme', 'bootstrap_float') . '/validator/js/bootstrapValidator.min.js');
@@ -89,5 +96,3 @@ function bootstrap_float_button($variables) {
   // This line break adds inherent margin between multiple buttons.
   return '<button' . drupal_attributes($element['#attributes']) . '>' . $label . "</button>\n";
 }
-
-

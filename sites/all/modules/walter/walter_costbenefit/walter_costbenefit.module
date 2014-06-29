@@ -293,6 +293,36 @@ function costbenefit_item_access($op, $entity) {
 }
 
 /**
+ * Returns array of costbenefits which belong to user.
+ *
+ * @return array
+ *   Array of costbenefit objects.
+ */
+function walter_costbenefit_index() {
+  global $user;
+  $query = db_select('costbenefit', 'cb')
+    ->fields('cb');
+  $query->addExpression("CONCAT('cb/', cb.cb_id)", 'path');
+  $query->condition('uid', $user->uid)
+    ->orderBy('created');
+  return $query->execute()->fetchAll();
+}
+
+/**
+ * Returns item list of costbenefits which belong to user.
+ *
+ * @return array
+ *   Array of links to lil pea's objects.
+ */
+function walter_costbenefit_index_item_list() {
+  $items = array();
+  foreach (walter_costbenefit_index() as $item) {
+    $items[] = l($item->title, $item->path);
+  }
+  return $items;
+}
+
+/**
  * Implements hook_forms().
  */
 function walter_costbenefit_forms($form_id, $args) {

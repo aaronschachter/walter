@@ -28,8 +28,10 @@ global $user;
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php print $user->mail; ?> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><?php print l('Settings', 'user/' . $user->uid . '/edit'); ?></li>
+            <?php print render($costbenefit_nav); ?>
+            <li><?php print l('Add new', 'cb/add'); ?></li>
             <li class="divider"></li>
+            <li><?php print l('My account', 'user/' . $user->uid . '/edit'); ?></li>
             <li><?php print l('Log out', 'user/logout'); ?></li>
           </ul>
         </li>

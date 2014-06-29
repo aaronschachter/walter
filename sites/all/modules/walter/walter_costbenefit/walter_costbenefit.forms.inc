@@ -35,16 +35,17 @@ function walter_costbenefit_form_submit($form, &$form_state) {
   // If a cb_id exists, load existing entity.
   if (isset($form_state['values']['cb_id'])) {
     $entity = costbenefit_load($form_state['values']['cb_id']);
+    $action = "Updated";
   }
   // Else create a new entity to save.
   else {
     $entity = entity_create('costbenefit', array());
+    $action = "Created";
   }
   $entity->title = $form_state['values']['title'];
-  if ($entity->save()) {
-    $form_state['redirect'] = 'cb/' . $entity->cb_id;
-    drupal_set_message(t('Updated ') . '<em>' . $entity->title . '</em>.');
-  }
+  $entity->save();
+  $form_state['redirect'] = 'cb/' . $entity->cb_id;
+  drupal_set_message(t($action) . ' <em>' . $entity->title . '</em>.');
 }
 
 /**

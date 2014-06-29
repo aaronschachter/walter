@@ -147,9 +147,27 @@ function walter_user_get_api_user($account = NULL) {
   $account = user_load($account->uid);
   $return = new StdClass();
   $return->uid = $account->uid;
-  $return->email = $account->mail;
-  $return->first_name = walter_user_get_first_name($account);
-  $return->created = $account->created;
-  $return->last_login = $account->login;
+  if ($return->uid != 0) {
+    $return->email = $account->mail;
+    $return->first_name = walter_user_get_first_name($account);
+    $return->created = $account->created;
+    $return->last_login = $account->login;
+    $return->cb_id = $account->cb_id;
+  }
   return $return;
+}
+
+
+/**
+ * Implements hook_services_request_postprocess_alter().
+ */
+function walter_user_services_request_postprocess_alter($controller, $args, &$result) {
+  switch ($controller['callback']) {
+    case '_system_resource_connect':
+      $result->user = walter_user_get_api_user($result->user);
+      break;
+    case '_user_resource_retrieve':
+      $result = walter_user_get_api_user($result);
+      break;
+  }
 }

@@ -42,7 +42,7 @@ function walter_costbenefit_form_submit($form, &$form_state) {
     $entity = entity_create('costbenefit', array());
     $action = "Created";
   }
-  $entity->title = $form_state['values']['title'];
+  $entity->title = strip_tags($form_state['values']['title']);
   $entity->save();
   $form_state['redirect'] = 'cb/' . $entity->cb_id;
   drupal_set_message(t($action) . ' <em>' . $entity->title . '</em>.');
@@ -93,7 +93,7 @@ function walter_costbenefit_item_add_form_submit($form, &$form_state) {
   $entity = entity_create('costbenefit_item', array());
   $entity->cb_id = $form_state['values']['cb_id'];
   $entity->box = $form_state['values']['box'];
-  $entity->title = $form_state['values']['title'];
+  $entity->title = strip_tags($form_state['values']['title']);
   $entity->type = $form_state['values']['type'];
   $entity->save();
   drupal_set_message('Added <em>' .  $entity->title . '</em>.');
@@ -141,7 +141,7 @@ function walter_costbenefit_item_edit_form_submit($form, &$form_state) {
   global $user;
   $cb_item_id = $form_state['values']['cb_item_id'];
   $entity = costbenefit_item_load($cb_item_id);
-  $entity->title = $form_state['values']['title'];
+  $entity->title = strip_tags($form_state['values']['title']);
   $entity->type = $form_state['values']['type'];
   $entity->save();
   drupal_set_message("Edited <em>" . $entity->title . "</em>.");

@@ -71,9 +71,11 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       $form['actions']['submit']['#prefix'] = '<p class="text-right">';
       $form['actions']['submit']['#suffix'] = '</p>';
       $form['title'] = array(
+        '#prefix' => '<hr />',
         '#type' => 'textfield',
         '#title' => t("The activity or substance is:"),
         '#required' => TRUE,
+        '#weight' => 100,
       );
       $form['#submit'][] = 'walter_user_new_user';
       break;
@@ -118,5 +120,18 @@ function walter_user_new_user($form, &$form_state) {
  */
 function walter_user_email_registration_name($edit, $account) {
   // Sets username as email.
+  return $account->mail;
+}
+
+/**
+ * Helper function to return global $user's first name.
+ */
+function walter_user_get_first_name() {
+  global $user;
+  $account = user_load($user->uid);
+  if (isset($account->field_first_name[LANGUAGE_NONE][0]['value'])) {
+    return $account->field_first_name[LANGUAGE_NONE][0]['value'];
+  }
+  // Return email as default if no first name is set.
   return $account->mail;
 }

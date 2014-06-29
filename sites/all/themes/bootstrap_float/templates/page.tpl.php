@@ -31,7 +31,7 @@ global $user;
             <?php foreach ($costbenefit_list as $item): ?>
               <li><?php print $item; ?></li>
             <?php endforeach; ?>
-            <li><?php print l('<span class="glyphicon glyphicon-plus"></span> Add new', 'cb/add', array('html' => TRUE)); ?></li>
+            <li><?php print l(' + New CBA', 'cb/add', array('html' => TRUE)); ?></li>
             <li class="divider"></li>
             <li role="presentation" class="dropdown-header">My account</li>
             <li><?php print l('Settings', 'user/' . $user->uid . '/edit'); ?></li>

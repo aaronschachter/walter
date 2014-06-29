@@ -41,15 +41,17 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
   $account = $user;
   // Globally change E-mail to Email.
   $form['account']['mail']['#title'] = t('Email');
-  $email_help = t("Email will never be publicly displayed.");
   switch ($form_id) {
     case 'user_profile_form':
       drupal_set_title(t("Settings"));
-      $form['account']['mail']['#description'] = $email_help;
       unset($form['timezone']);
       if (module_exists('contact')) {
         unset($form['contact']);
       }
+
+      // Easiest way to turn of these lame tooltips in Bootstrap theme.
+      unset($form['account']['mail']['#description']);
+      unset($form['account']['pass']['#description']);
       break;
     case 'user_login_block':
     case 'user_login':
@@ -61,11 +63,11 @@ function walter_user_form_alter(&$form, $form_state, $form_id) {
       $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
       break;
     case 'user_register_form':
-      $form['account']['mail']['#description'] = $email_help;;
+      unset($form['account']['mail']['#description']);
       // Removes password-confirmation field.
       $form['account']['pass']['#type'] = 'password';
       $form['account']['pass']['#title'] = 'Password';
-      $form['account']['pass']['#description'] = 'Create a password.';
+      unset($form['account']['pass']['#description']);
       $form['actions']['submit']['#value'] = t('Get started');
       $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
       $form['actions']['submit']['#prefix'] = '<p class="text-right">';
@@ -139,6 +141,9 @@ function walter_user_get_first_name($account = NULL) {
   return $account->mail;
 }
 
+/**
+ * Helper function to return a suitable User object for API.
+ */
 function walter_user_get_api_user($account = NULL) {
   if (!$account) {
     global $user;

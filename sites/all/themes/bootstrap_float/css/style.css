@@ -19,7 +19,9 @@ p.help-block {
   font-size: 0.7em;
   color: #999;
 }
-
+.dropdown-menu a.active {
+  font-weight: bold;
+}
 
 a.edit-cb_item-link {
   cursor: pointer;

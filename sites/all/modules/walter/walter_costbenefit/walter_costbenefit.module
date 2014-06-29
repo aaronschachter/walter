@@ -32,7 +32,7 @@ function walter_costbenefit_menu() {
   $items['cb/add'] = array(
     'title' => 'New Cost-Benefit Matrix',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('costbenefit_form', NULL),
+    'page arguments' => array('walter_costbenefit_form', NULL),
     'access callback' => 'user_is_logged_in',
     'file' => 'walter_costbenefit.forms.inc',
   );
@@ -113,6 +113,22 @@ function costbenefit_load($cb_id) {
 function costbenefit_item_load($cb_item_id) {
   $entity = entity_load('costbenefit_item', array($cb_item_id));
   return array_pop($entity);
+}
+
+/**
+ * Implements hook_permission().
+ */
+function walter_costbenefit_permission() {
+  return array(
+    'create costbenefit' => array(
+      'title' => t('Create costbenefit'),
+      'description' => t('Create an additional costbenefit'),
+    ),
+    'delete own costbenefit' => array(
+      'title' => t('Delete own costbenefit'),
+      'description' => t('Delete own costbenefit'),
+    ),
+  );
 }
 
 /**
@@ -290,6 +306,39 @@ function costbenefit_item_access($op, $entity) {
     return TRUE;
   }
   return $user->uid == $entity->uid;
+}
+
+/**
+ * Returns array of costbenefits which belong to user.
+ *
+ * @return array
+ *   Array of costbenefit objects.
+ */
+function walter_costbenefit_index() {
+  global $user;
+  $query = db_select('costbenefit', 'cb')
+    ->fields('cb');
+  $query->addExpression("CONCAT('cb/', cb.cb_id)", 'path');
+  $query->condition('uid', $user->uid)
+    ->orderBy('created');
+  return $query->execute()->fetchAll();
+}
+
+/**
+ * Returns item list of costbenefits which belong to user.
+ *
+ * @return array
+ *   Array of links to lil pea's objects.
+ */
+function walter_costbenefit_index_item_list() {
+  $items = array();
+  if (!user_access('create costbenefit')) { return $items; }
+
+  foreach (walter_costbenefit_index() as $item) {
+    $items[] = l($item->title, $item->path);
+  }
+  $items[] = l(' + New CBA', 'cb/add', array('html' => TRUE));
+  return $items;
 }
 
 /**

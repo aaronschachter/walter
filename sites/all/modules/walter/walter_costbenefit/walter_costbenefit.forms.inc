@@ -24,7 +24,7 @@ function walter_costbenefit_form($form, &$form_state, $entity = NULL) {
     '#required' => TRUE,
     '#default_value' => isset($entity->title) ? $entity->title : NULL,
   );
-  $form['submit'] = _get_costbenefit_form_submit_element($label);
+  $form['submit'] = _get_costbenefit_form_submit_element($form, $label);
   return $form;
 }
 
@@ -81,7 +81,7 @@ function walter_costbenefit_item_add_form($form, &$form_state, $cb, $box) {
     '#options' => _costbenefit_get_type_options(),
     '#default_value' => 0,
   );
-  $form['submit'] = _get_costbenefit_form_submit_element('Add');
+  $form['submit'] = _get_costbenefit_form_submit_element($form, 'Add');
   return $form;
 }
 
@@ -127,10 +127,7 @@ function walter_costbenefit_item_edit_form($form, &$form_state, $item) {
     '#options' => _costbenefit_get_type_options(),
     '#default_value' => $item->type,
   );
-  $form['submit'] = _get_costbenefit_form_submit_element('Update');
-  // $form['footer'] = array(
-  //   '#markup' => l('Delete this item', 'cb/' . $item->cb_id . '/' . $item->cb_item_id . '/delete'),
-  // );
+  $form['submit'] = _get_costbenefit_form_submit_element($form, 'Update');
   return $form;
 }
 
@@ -187,21 +184,48 @@ function walter_costbenefit_item_delete_form($form, &$form_state, $entity) {
 /**
  * Submit callback for walter_costbenefit_item_delete_form().
  */
-function walter_costbenefit_item_delete_form_submit($form, &$form_state) {
+function walter_costbenefit_item_form_delete_submit($form, &$form_state) {
+  //function walter_costbenefit_item_delete_form_submit($form, &$form_state) {
   $cb_item_id = $form_state['values']['cb_item_id'];
   entity_delete('costbenefit_item', $cb_item_id);
   $form_state['redirect'] = 'cb/' . $form_state['values']['cb_id'];
   drupal_set_message("Item " . $form_state['values']['title'] . " deleted.");
 }
 
-function _get_costbenefit_form_submit_element($label) {
-  return array(
+function _get_costbenefit_form_submit_element(&$form, $label) {
+  // return array(
+  //   '#type' => 'submit',
+  //   '#value' => $label,
+  //   '#attributes' => array(
+  //     'class' => array('btn-primary'),
+  //   ),
+  //   '#prefix' => '<div class="modal-footer">
+  //     <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Cancel</button>',
+  //   '#suffix' => '</div>'
+  // );
+  $form['actions'] = array(
+    '#type' => 'actions',
+    '#prefix' => '<div class="modal-footer">',
+    '#suffix' => '</div>',
+  );
+  if ($label == 'Update') {
+    $form['actions']['delete'] = array(
+      '#type' => 'button',
+      '#value' => t('Delete'),
+      '#submit' => array('walter_costbenefit_item_form_delete_submit'),
+      '#attributes' => array(
+        'class' => array('pull-left', 'btn-link'),
+      ),
+    );
+  }
+  $form['actions']['cancel'] = array(
+    '#markup' => '<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>',
+  );
+  $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => $label,
+    '#value' => t($label),
     '#attributes' => array(
       'class' => array('btn-primary'),
     ),
-    '#prefix' => '<div class="modal-footer"><button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Cancel</button>',
-    '#suffix' => '</div>'
   );
 }

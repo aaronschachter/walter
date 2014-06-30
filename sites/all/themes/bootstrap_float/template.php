@@ -44,7 +44,7 @@ function bootstrap_float_form_alter(&$form, $form_state, $form_id) {
     $form['#attributes']['class'][] = 'bv-form';
     bootstrap_float_add_bootstrap_validator_wrapper($form, 'title');
     $form['title']['#attributes']['class'][] = 'input-lg';
-    $form['submit']['#attributes']['class'][] = 'btn-lg';
+    //$form['submit']['#attributes']['class'][] = 'btn-lg';
   }
   switch ($form_id) {
     case 'user_login_block':
